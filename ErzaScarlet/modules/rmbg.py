@@ -28,7 +28,7 @@ from telethon.tl import functions
 from ErzaScarlet.events import register
 from ErzaScarlet import telethn, REM_BG_API_KEY
 
-REM_BG_API_KEY = ("REM_BG_API_KEY", required=False)
+REM_BG_API_KEY = ("{REM_BG_API_KEY}", required=False)
 TEMP_DOWNLOAD_DIRECTORY = "./Images"
 
 
