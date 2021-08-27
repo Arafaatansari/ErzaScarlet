@@ -21,3 +21,7 @@ async def install_module(_, message):
     m = await message.reply_text("**Installing Module**")
     await message.reply_to_message.download(f"./ErzaScarlet/modules/{document.file_name}")
     await m.edit("**Done**")
+    os.execvp(
+        f"python{str(pyver.split(' ')[0])[:3]}",
+        [f"python{str(pyver.split(' ')[0])[:3]}", "-m", "DaisyX"],
+    )
