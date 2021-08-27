@@ -29,7 +29,7 @@ from ErzaScarlet.events import register
 from ErzaScarlet import telethn as tbot
 from ErzaScarlet import REM_BG_API_KEY
 
-REM_BG_API_KEY = ("{REM_BG_API_KEY}", required=False)
+REM_BG_API_KEY = "{REM_BG_API_KEY}"
 TEMP_DOWNLOAD_DIRECTORY = "./Images"
 
 
