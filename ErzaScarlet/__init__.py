@@ -89,7 +89,7 @@ if ENV:
     IBM_WATSON_CRED_URL = os.environ.get("IBM_WATSON_CRED_URL", None)
     IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
-    REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY")
+    REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
     
     
     try:
@@ -161,6 +161,7 @@ else:
     SPAMWATCH_SUPPORT_CHAT = Config.SPAMWATCH_SUPPORT_CHAT
     SPAMWATCH_API = Config.SPAMWATCH_API
     INFOPIC = Config.INFOPIC
+    REM_BG_API_KEY = Config.REM_BG_API_KEY
 
     try:
         BL_CHATS = set(int(x) for x in Config.BL_CHATS or [])
