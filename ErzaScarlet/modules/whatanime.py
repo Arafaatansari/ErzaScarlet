@@ -1,4 +1,4 @@
-
+#FULL IMPORT
 import os
 import time
 import html
@@ -6,48 +6,19 @@ import aiohttp
 import asyncio
 import datetime
 import tempfile
-
+#FROM IMPORT
 from urllib.parse import quote as urlencode
 from decimal import Decimal
 from datetime import timedelta
-
+#PYROGRAM IMPORT
 from pyrogram import Client, filters
 from pyrogram.types import Message
-
+#ERZA IMPORTS
 from ErzaScarlet import pbot
+# LET THE CODE START
 
 session = aiohttp.ClientSession()
 progress_callback_data = {}
-
-
-def format_bytes(size):
-    size = int(size)
-    # 2**10 = 1024
-    power = 1024
-    n = 0
-    power_labels = {0: '', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
-    while size > power:
-        size /= power
-        n += 1
-    return f"{size:.2f} {power_labels[n]+'B'}"
-
-
-def return_progress_string(current, total):
-    filled_length = int(30 * current // total)
-    return '[' + '=' * filled_length + ' ' * (30 - filled_length) + ']'
-
-
-def calculate_eta(current, total, start_time):
-    if not current:
-        return '00:00:00'
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    seconds = (elapsed_time * (total / current)) - elapsed_time
-    thing = ''.join(str(timedelta(seconds=seconds)
-                        ).split('.')[:-1]).split(', ')
-    thing[-1] = thing[-1].rjust(8, '0')
-    return ', '.join(thing)
-
 
 @pbot.on_message(filters.command('whatanime'))
 async def whatanime(c: Client, m: Message):
@@ -67,31 +38,26 @@ async def whatanime(c: Client, m: Message):
         await proc.communicate()
         await reply.edit_text('Uploading...')
         with open(new_path, 'rb') as file:
-            async with session.post('https://api.trace.moe/search', data={'image': file}) as resp:
+            async with session.post('https://api.trace.moe/search?cutBorders&anilistInfo', data={'image': file}) as resp:
                 json = await resp.json()
-    if isinstance(json, str):
-        await reply.edit_text(html.escape(json))
+    if json.get('error'):
+        await reply.edit_text(json['error'], parse_mode=None)
     else:
         try:
-            match = next(iter(json['docs']))
-        except StopIteration:
+            match = json['result'][0]
+        except IndexError:
             await reply.edit_text('No match')
         else:
-            nsfw = match['is_adult']
-            title_native = match['title_native']
-            title_english = match['title_english']
-            title_romaji = match['title_romaji']
-            synonyms = ', '.join(match['synonyms'])
-            filename = match['filename']
-            tokenthumb = match['tokenthumb']
-            anilist_id = match['anilist_id']
+            nsfw = match['anilist']['isAdult']
+            title_native = match['anilist']['title']['native']
+            title_english = match['anilist']['title']['english']
+            title_romaji = match['anilist']['title']['romaji']
+            synonyms = ', '.join(match['anilist']['synonyms'])
+            anilist_id = match['anilist']['id']
             episode = match['episode']
             similarity = match['similarity']
-            from_time = str(datetime.timedelta(seconds=match['from'])).split(
-                '.', 1)[0].rjust(8, '0')
-            to_time = str(datetime.timedelta(seconds=match['to'])).split(
-                '.', 1)[0].rjust(8, '0')
-            at_time = match['at']
+            from_time = str(datetime.timedelta(seconds=match['from'])).split('.', 1)[0].rjust(8, '0')
+            to_time = str(datetime.timedelta(seconds=match['to'])).split('.', 1)[0].rjust(8, '0')
             text = f'<a href="https://anilist.co/anime/{anilist_id}">{title_romaji}</a>'
             if title_english:
                 text += f' ({title_english})'
@@ -103,24 +69,22 @@ async def whatanime(c: Client, m: Message):
             if episode:
                 text += f'<b>Episode:</b> {episode}\n'
             if nsfw:
-                text += '<b>Hentai/NSFW:</b> no'
+                text += '<b>Hentai/NSFW:</b> Yes'
 
             async def _send_preview():
-                url = f'https://media.trace.moe/video/{anilist_id}/{urlencode(filename)}?t={at_time}&token={tokenthumb}'
                 with tempfile.NamedTemporaryFile() as file:
-                    async with session.get(url) as resp:
+                    async with session.get(match['video']) as resp:
                         while True:
-                            chunk = await resp.content.read(10)
+                            chunk = await resp.content.read(4096)
                             if not chunk:
                                 break
                             file.write(chunk)
                     file.seek(0)
                     try:
                         await reply.reply_video(file.name, caption=f'{from_time} - {to_time}')
-                    except Exception:
+                    except BaseException:
                         await reply.reply_text('Cannot send preview :/')
             await asyncio.gather(reply.edit_text(text, disable_web_page_preview=True), _send_preview())
-
 
 async def progress_callback(current, total, reply):
     message_identifier = (reply.chat.id, reply.message_id)
@@ -139,7 +103,6 @@ async def progress_callback(current, total, reply):
             download_speed = '0 B'
         text = f'''Downloading...
 <code>{return_progress_string(current, total)}</code>
-
 <b>Total Size:</b> {format_bytes(total)}
 <b>Downladed Size:</b> {format_bytes(current)}
 <b>Download Speed:</b> {download_speed}/s
@@ -148,4 +111,4 @@ async def progress_callback(current, total, reply):
             await reply.edit_text(text)
             prevtext = text
             last_edit_time = time.time()
-            progress_callback_data[message_identifier] = last_edit_time, prevtext, start_time
+            progress_callback_data[message_identifier] = last_edit_time, prevtext, start_time            
