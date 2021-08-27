@@ -23,5 +23,5 @@ async def install_module(_, message):
     await m.edit("**Done**")
     os.execvp(
         f"python{str(pyver.split(' ')[0])[:3]}",
-        [f"python{str(pyver.split(' ')[0])[:3]}", "-m", "DaisyX"],
+        [f"python{str(pyver.split(' ')[0])[:3]}", "-m", "ErzaScarlet"],
     )
