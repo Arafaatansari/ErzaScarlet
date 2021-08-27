@@ -20,4 +20,4 @@ async def install_module(_, message):
         return
     m = await message.reply_text("**Installing Module**")
     await message.reply_to_message.download(f"./ErzaScarlet/modules/{document.file_name}")
-        await m.edit("**Done**")
+    await m.edit("**Done**")
