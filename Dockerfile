@@ -65,7 +65,7 @@ RUN apt update && apt upgrade -y && \
 RUN pip3 install --upgrade pip setuptools
 
 # Copy Python Requirements to /root/ErzaScarlet
-RUN git clone https://github.com/noobsohail/ErzaScarlets /root/ErzaScarlet
+RUN git clone -b trial https://github.com/noobsohail/ErzaScarlets /root/ErzaScarlet
 WORKDIR /root/ErzaScarlet
 
 #Copy config file to /root/ErzaScarlet/ErzaScarlet
