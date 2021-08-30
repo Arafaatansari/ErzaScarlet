@@ -60,6 +60,7 @@ if ENV:
     except ValueError:
         raise Exception("Your tiger users list does not contain valid integers.")
 
+    que = {}
     INFOPIC = bool(os.environ.get("INFOPIC", False))
     EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
     WEBHOOK = bool(os.environ.get("WEBHOOK", False))
@@ -89,7 +90,20 @@ if ENV:
     IBM_WATSON_CRED_URL = os.environ.get("IBM_WATSON_CRED_URL", None)
     IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
-    REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
+    REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", "")
+    DURATION_LIMIT = int(os.environ.get("DURATION_LIMIT", "100"))
+    SUDO_USERS = os.environ.get("SUDO_USERS", "").split())
+    COMMAND_PREFIXES = os.environ.get("TRIGGERS", "/ !").split(" ")
+    SESSION_NAME = os.environ.get("SESSION_NAME", "session")
+    UPDATES_CHANNEL = os.environ.get("UPDATES_CHANNEL", "ErzaScarlet_justice")
+    ARQ_API_KEY = os.environ.get("ARQ_API_KEY", None)
+    BOT_NAME = os.environ.get("BOT_NAME")
+    PMPERMIT = os.environ.get("PMPERMIT", None)
+    ASSISTANT_NAME = os.environ.get("ASSISTANT_NAME", "Erza Scarlet")
+    SUPPORT_GROUP = os.environ.get("SUPPORT_GROUP", "ErzaScarlet_justice")
+    PROJECT_NAME = os.environ.get("PROJECT_NAME", "Erza Scarlet 2.0")
+    SOURCE_CODE = os.environ.get("SOURCE_CODE", "github.com/noobsohail/ErzaScarlet")
+    BOT_USERNAME = os.environ.get("BOT_USERNAME")
     
     
     try:
