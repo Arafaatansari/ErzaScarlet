@@ -104,6 +104,8 @@ if ENV:
     PROJECT_NAME = os.environ.get("PROJECT_NAME", "Erza Scarlet 2.0")
     SOURCE_CODE = os.environ.get("SOURCE_CODE", "github.com/noobsohail/ErzaScarlet")
     BOT_USERNAME = os.environ.get("BOT_USERNAME")
+    BG_IMAGE = os.environ.get("BG_IMAGE", "https://telegra.ph/file/2caaefbec7e83707f3e93.jpg")
+
     
     
     try:
