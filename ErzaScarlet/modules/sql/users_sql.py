@@ -1,5 +1,4 @@
 import threading
-
 from ErzaScarlet import dispatcher
 from ErzaScarlet.modules.sql import BASE, SESSION
 from sqlalchemy import (Column, ForeignKey, Integer, String, UnicodeText,
