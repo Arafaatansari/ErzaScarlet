@@ -6,6 +6,7 @@ import spamwatch
 import telegram.ext as tg
 from telegram.ext import Defaults
 from telegram import ChatAction, ParseMode
+from functools import wraps
 from redis import StrictRedis
 from telethon import TelegramClient
 from pyrogram import Client, errors
