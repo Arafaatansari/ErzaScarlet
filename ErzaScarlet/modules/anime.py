@@ -217,7 +217,7 @@ def anime(update, context):
         for x in json['studios']['nodes']:
             msg += f"{x['name']}, "
         msg = msg[:-2] + '`\n'
-        anime_name_w = f"{json['title']['romaji']}" | , f"{json['title']['english']}"
+        anime_name_w = f"{json['title']['romaji']}", '|', f"{json['title']['english']}"
         info = json.get('siteUrl')
         trailer = json.get('trailer', None)
         anime_id = json['id']
