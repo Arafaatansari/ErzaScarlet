@@ -33,7 +33,7 @@ def wall(update: Update, context: CallbackContext):
                 bot.send_message(chat_id, "No results found! Refine your search.")
                 return
             else:
-                index = randint(0, len(wallpapers) - 10)  # Choose random index
+                index = randint(10, len(wallpapers) - 1)  # Choose random index
                 wallpaper = wallpapers[index]
                 wallpaper = wallpaper.get("url_image")
                 wallpaper = wallpaper.replace("\\", "")
