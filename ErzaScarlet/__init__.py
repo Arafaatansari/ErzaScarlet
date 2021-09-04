@@ -4,9 +4,12 @@ import sys
 import time
 import spamwatch
 import telegram.ext as tg
+<<<<<<< HEAD
 from telegram.ext import Defaults
 from telegram import ChatAction, ParseMode
 from functools import wraps
+=======
+>>>>>>> parent of f58584b (try but don't cry)
 from redis import StrictRedis
 from telethon import TelegramClient
 from pyrogram import Client, errors
@@ -19,8 +22,6 @@ logging.basicConfig(
     handlers=[logging.FileHandler("log.txt"), logging.StreamHandler()],
     level=logging.INFO,
 )
-
-__version__ = "1.2.1.0"
 
 LOGGER = logging.getLogger(__name__)
 
@@ -199,19 +200,6 @@ finally:
    REDIS.ping()
    LOGGER.info("Your redis server is now alive!")
 
-def typing(func):
-    """Sends typing action while processing func command."""
-
-    @wraps(func)
-    def command_func(update, context, *args, **kwargs):
-        context.bot.send_chat_action(
-            chat_id=update.effective_chat.id, action=ChatAction.TYPING
-        )
-        return func(update, context, *args, **kwargs)
-
-    return command_func   
-
-defaults = Defaults(parse_mode=ParseMode.HTML)
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 telethn = TelegramClient("Erza", API_ID, API_HASH)
 pbot = Client("ErzaPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
