@@ -4,18 +4,6 @@ import sys
 import time
 import spamwatch
 import telegram.ext as tg
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-from telegram.ext import Defaults
-from telegram import ChatAction, ParseMode
-from functools import wraps
-=======
->>>>>>> parent of f58584b (try but don't cry)
-=======
->>>>>>> parent of f58584b (try but don't cry)
-=======
->>>>>>> parent of f58584b (try but don't cry)
 from redis import StrictRedis
 from telethon import TelegramClient
 from pyrogram import Client, errors
@@ -102,7 +90,6 @@ if ENV:
     IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
-    TMDBAPI = os.environ.get("TMDBAPI")
     
     
     try:
