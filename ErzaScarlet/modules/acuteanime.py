@@ -21,15 +21,6 @@ base_url = "https://kitsu.io/api/edge"
 tempdict = {}
 
 
-@run_async
-@typing
-def anime_entry(update, context):
-    update.effective_message.reply_text(
-        st.TOSEARCH_ANIME, reply_markup=ForceReply(selective=True),
-    )
-
-    return 1
-
 
 @run_async
 @typing
@@ -66,7 +57,6 @@ def anime(update, context):
     msg.reply_text(
         f"🔍 Search results for **{msg.text}**:",
         reply_markup=InlineKeyboardMarkup(keyb[:6]),
-        parse_mode=telegram.ParseMode.MARKDOWN
     )
 
     return ConversationHandler.END
@@ -147,14 +137,7 @@ def cancel(update, context):
     return ConversationHandler.END
 
 
-anime_HANDLER = ConversationHandler(
-    entry_points=[CommandHandler("anime", anime_entry)],
-    states={1: [MessageHandler(Filters.text & ~Filters.command, anime)]},
-    fallbacks=[CommandHandler("cancel", cancel)],
-    conversation_timeout=120,
-)
 
 AN_BUTTON_HANDLER = CallbackQueryHandler(anime_button, pattern=r"anime_")
 
-dispatcher.add_handler(anime_HANDLER)
 dispatcher.add_handler(AN_BUTTON_HANDLER)
