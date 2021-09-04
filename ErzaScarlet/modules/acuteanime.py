@@ -21,6 +21,7 @@ base_url = "https://kitsu.io/api/edge"
 tempdict = {}
 
 
+
 @run_async
 @typing
 def anime(update, context):
@@ -31,12 +32,12 @@ def anime(update, context):
     res = r.get(f"{base_url}/anime?filter%5Btext%5D={query}")
     if res.status_code != 200:
         msg.reply_text(st.API_ERR)
-        return -1
+        return 1
 
     res = res.json()["data"]
     if len(res) <= 0:
         msg.reply_text(st.NOT_FOUND)
-        return -1
+        return 1
 
     # Add results array with user's id as key
     tempdict[user.id] = res
@@ -54,8 +55,7 @@ def anime(update, context):
         )
 
     msg.reply_text(
-        f"🔍 Search results for **{msg.text}**:",
-        parse_mode=ParseMode.MARKDOWN,
+        f"🔍 Search results for {msg.text}:",
         reply_markup=InlineKeyboardMarkup(keyb[:6]),
     )
 
