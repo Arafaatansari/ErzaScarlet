@@ -209,7 +209,7 @@ def anime(update, context):
         return
     if json:
         json = json['data']['Media']
-        msg = f"*{json['title']['romaji']}*(`{json['title']['romaji']}`)\n*{json['title']['english']}*(`{json['title']['english']}`)\n *Type*: {json['format']}\n*Status*: {json['status']}\n*Episodes*: {json.get('episodes', 'N/A')}\n*Duration*: {json.get('duration', 'N/A')} Per Ep.\n*Score*: {json['averageScore']}\n*Genres*: `"
+        msg = f"*{json['title']['english']}*(`{json['title']['romaji']}`)\n*Type*: {json['format']}\n*Status*: {json['status']}\n*Episodes*: {json.get('episodes', 'N/A')}\n*Duration*: {json.get('duration', 'N/A')} Per Ep.\n*Score*: {json['averageScore']}\n*Genres*: `"
         for x in json['genres']:
             msg += f"{x}, "
         msg = msg[:-2] + '`\n'
@@ -217,7 +217,7 @@ def anime(update, context):
         for x in json['studios']['nodes']:
             msg += f"{x['name']}, "
         msg = msg[:-2] + '`\n'
-        anime_name_w = f"{json['title']['romaji']}", '|', f"{json['title']['english']}"
+        anime_name_w = f"{json['title']['romaji']}"
         info = json.get('siteUrl')
         trailer = json.get('trailer', None)
         anime_id = json['id']
