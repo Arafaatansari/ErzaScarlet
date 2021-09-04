@@ -3,7 +3,8 @@ import os
 import sys
 import time
 import spamwatch
-import telegram.ext as tg, Defaults
+import telegram.ext as tg
+from telegram.ext import Defaults
 from telegram import ChatAction, ParseMode
 from redis import StrictRedis
 from telethon import TelegramClient
