@@ -22,7 +22,7 @@ tempdict = {}
 
 @run_async
 @typing
-def sanime_entry(update, context):
+def anime_entry(update, context):
     update.effective_message.reply_text(
         st.TOSEARCH_ANIME, reply_markup=ForceReply(selective=True),
     )
@@ -32,7 +32,7 @@ def sanime_entry(update, context):
 
 @run_async
 @typing
-def sanime(update, context):
+def anime(update, context):
     msg = update.message
     user = update.effective_user
     query = msg.text.replace(" ", "%20")
@@ -71,7 +71,7 @@ def sanime(update, context):
 
 
 @run_async
-def sanime_button(update, context):
+def anime_button(update, context):
     query = update.callback_query
     chat = update.effective_chat
     user = update.effective_user
@@ -143,14 +143,14 @@ def cancel(update, context):
     return ConversationHandler.END
 
 
-SANIME_HANDLER = ConversationHandler(
-    entry_points=[CommandHandler("sanime", sanime_entry)],
-    states={1: [MessageHandler(Filters.text & ~Filters.command, sanime)]},
+anime_HANDLER = ConversationHandler(
+    entry_points=[CommandHandler("anime", anime_entry)],
+    states={1: [MessageHandler(Filters.text & ~Filters.command, anime)]},
     fallbacks=[CommandHandler("cancel", cancel)],
     conversation_timeout=120,
 )
 
-AN_BUTTON_HANDLER = CallbackQueryHandler(sanime_button, pattern=r"sanime_")
+AN_BUTTON_HANDLER = CallbackQueryHandler(anime_button, pattern=r"anime_")
 
-dispatcher.add_handler(SANIME_HANDLER)
+dispatcher.add_handler(anime_HANDLER)
 dispatcher.add_handler(AN_BUTTON_HANDLER)
