@@ -1,4 +1,5 @@
 import requests as r
+import telegram
 
 from telegram.ext import (
     MessageHandler,
@@ -9,7 +10,7 @@ from telegram.ext import (
 )
 
 from telegram.ext.dispatcher import run_async
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ForceReply
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ForceReply, ParseMode
 
 from ErzaScarlet import dispatcher, typing
 from ErzaScarlet.helper_extra import strings as st
@@ -63,8 +64,9 @@ def anime(update, context):
         )
 
     msg.reply_text(
-        f"🔍 Search results for <b>{msg.text}</b>:",
+        f"🔍 Search results for **{msg.text}**:",
         reply_markup=InlineKeyboardMarkup(keyb[:6]),
+        parse_mode=telegram.ParseMode.MARKDOWN
     )
 
     return ConversationHandler.END
@@ -118,6 +120,7 @@ def anime_button(update, context):
             ),
             timeout=60,
             disable_web_page_preview=True,
+            parse_mode=telegram.ParseMode.MARKDOWN
         )
 
     else:
@@ -132,6 +135,7 @@ def anime_button(update, context):
                 )
             ),
             disable_web_page_preview=True,
+            parse_mode=telegram.ParseMode.MARKDOWN
         )
     del tempdict[user_id]
 

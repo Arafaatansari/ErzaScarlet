@@ -19,7 +19,7 @@ from telegram import __version__ as _libv_
 
 # Contents
 MOVIE_STR = """
-️**{}</b> : {}
+️**{}** : {}
 
 • Status : `{}`
 • Genres : `{}`
@@ -35,7 +35,7 @@ MOVIE_STR = """
 """
 
 TV_STR = """
-**{}</b>
+**{}**
 
 • Created by : `{}`
 • Genres : `{}`
@@ -52,11 +52,11 @@ TV_STR = """
 • OverView : <em>{}</em>
 """
 
-ANIME_STR = """
+ANIME_STR = f"""
 **{}** | **{}**
 
-• Category : `{}`
 • Type : `{}`
+• Category : `{}`
 • Average Rating : `{}`
 • Status : `{}`
 • First aired : `{}`
@@ -68,7 +68,7 @@ ANIME_STR = """
 """
 
 MANGA_STR = """
-**{}</b> | **{}</b>
+**{}** | **{}**
 • Type : `{}`
 • Average Rating : `{}`
 • Status : `{}`
@@ -83,17 +83,17 @@ MANGA_STR = """
 
 # Inline Content
 INLINE_STR = """
-• **Title</b> : {}
-• **Release</b> : `{}`
-• **Popularity</b> : `{}`
-• **Language</b> : `{}`
-• **Average Rating</b> : `{}`
+• **Title** : {}
+• **Release** : `{}`
+• **Popularity** : `{}`
+• **Language** : `{}`
+• **Average Rating** : `{}`
 
-• **OverView</b> : <em>{}</em>
+• **OverView** : <em>{}</em>
 """
 
 INLINE_DESC = """
-**Usage:</b> `&lt;tv&gt; title` **or</b> `&lt;movie&gt; title` **in inline query.</b>
+**Usage:** `&lt;tv&gt; title` **or** `&lt;movie&gt; title` **in inline query.**
 
 Examples:
 × `&lt;movie&gt; Avengers Endgame`
@@ -125,13 +125,13 @@ I'm fully written in \
 Python3 by <a href="tg://user?id=894380120">starry</a>, \
 feel free to report him if you find any rough edge inside me.
 
-**×</b> Bot version : `{__version__}`
-**×</b> Python version : `{python_version()}`
-**×</b> Library version : `PTB {_libv_}`
-**×</b> Movies & TV data : `themoviedb.org`
-**×</b> Anime data from : `kitsu.io`
-**×</b> Music data from : `deezer.com`
-**×</b> Lyrics data from : `genius.com`
+**×** Bot version : `{__version__}`
+**×** Python version : `{python_version()}`
+**×** Library version : `PTB {_libv_}`
+**×** Movies & TV data : `themoviedb.org`
+**×** Anime data from : `kitsu.io`
+**×** Music data from : `deezer.com`
+**×** Lyrics data from : `genius.com`
 
 If you enjoyed using me & wanna support my creator \
 hit the donate button below, since he's just a student so \
@@ -146,31 +146,31 @@ for the related functions.
 """
 
 MOVIE_HELP = """
-**🗒️ Documentation for Movies & TV related functions:</b>
+**🗒️ Documentation for Movies & TV related functions:**
 
-**×</b> /movies : Search for info about your favorite movies.
-**×</b> /tvshows : Get information for your favotite TV shows.
-**×</b> /toprated : (Soon) | View information about top rated, Movie & TV titles.
+**×** /movies : Search for info about your favorite movies.
+**×** /tvshows : Get information for your favotite TV shows.
+**×** /toprated : (Soon) | View information about top rated, Movie & TV titles.
 """
 ANIME_HELP = """
-**🗒️ Documentation for Anime & Manga related functionsfunctions:</b>
+**🗒️ Documentation for Anime & Manga related functionsfunctions:**
 
-**×</b> /anime : Search for info about your favorite anime titles.
-**×</b> /manga : Get information about your favorite manga titles.
+**×** /anime : Search for info about your favorite anime titles.
+**×** /manga : Get information about your favorite manga titles.
 """
 MUSIC_HELP = """
-**🗒️ Documentation for music & lyrics related functions:</b>
+**🗒️ Documentation for music & lyrics related functions:**
 
-**×</b> /music : Download your favorite music in high resolution.
-**×</b> /lyrics : Get lyrics for your favorite songs.
-**×</b> /nowplaying : Flex you currently or last played song in spotify.
+**×** /music : Download your favorite music in high resolution.
+**×** /lyrics : Get lyrics for your favorite songs.
+**×** /nowplaying : Flex you currently or last played song in spotify.
 """
 MISC_HELP = """
-**🗒️ Documentation for some miscs command which don't fit anywhere!</b>
+**🗒️ Documentation for some miscs command which don't fit anywhere!**
 
-**×</b> /reddit : Gets you random memes scraped from popular subreddits.
-**×</b> /subtitle : Download subtitles for your movies.
-**×</b> /watchlist : Get list of saved shows from your watchlist :D.
+**×** /reddit : Gets you random memes scraped from popular subreddits.
+**×** /subtitle : Download subtitles for your movies.
+**×** /watchlist : Get list of saved shows from your watchlist :D.
 """
 
 # Errors
@@ -228,7 +228,7 @@ MUSICNOTFOUND = "Sorry i couldn't find that song :("
 
 # Subtitles
 TOSEARCHSUBS = "Please reply with the Movie | Anime name you want subs for."
-SUBS_STR = "🏷 Subtitles for **{}</b>.\nClick on buttons below to download!"
+SUBS_STR = "🏷 Subtitles for **{}**.\nClick on buttons below to download!"
 
 # Spotify
 SPT_LOGIN = "Hey {}, Please click the button below to login with your spotify account."
