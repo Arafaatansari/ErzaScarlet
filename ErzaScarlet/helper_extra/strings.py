@@ -52,7 +52,7 @@ TV_STR = """
 • OverView : <em>{}</em>
 """
 
-ANIME_STR = f"""
+ANIME_STR = """
 **{}** | **{}**
 
 • Type : `{}`
