@@ -19,86 +19,86 @@ from telegram import __version__ as _libv_
 
 # Contents
 MOVIE_STR = """
-️<b>{}</b> : {}
+️**{}</b> : {}
 
-• Status : <pre>{}</pre>
-• Genres : <pre>{}</pre>
-• Languages : <pre>{}</pre>
-• Runtime : <pre>{} minutes</pre>
-• Budget : <pre>{}</pre>
-• Revenue : <pre>{}</pre>
-• Release Date : <pre>{}</pre>
-• Average Rating : <pre>{}</pre>
-• Popularity : <pre>{}</pre>
+• Status : `{}`
+• Genres : `{}`
+• Languages : `{}`
+• Runtime : `{} minutes`
+• Budget : `{}`
+• Revenue : `{}`
+• Release Date : `{}`
+• Average Rating : `{}`
+• Popularity : `{}`
 
 • OverView : <em>{}</em>
 """
 
 TV_STR = """
-<b>{}</b>
+**{}</b>
 
-• Created by : <pre>{}</pre>
-• Genres : <pre>{}</pre>
-• Languages : <pre>{}</pre>
-• Episodes Runtime : <pre>{}</pre>
-• First aired : <pre>{}</pre>
-• Last aired : <pre>{}</pre>
-• Status : <pre>{}</pre>
-• Seasons : <pre>{}</pre>
-• Total EPs : <pre>{}</pre>
-• Average Rating : <pre>{}</pre>
-• Production Company : <pre>{}</pre>
+• Created by : `{}`
+• Genres : `{}`
+• Languages : `{}`
+• Episodes Runtime : `{}`
+• First aired : `{}`
+• Last aired : `{}`
+• Status : `{}`
+• Seasons : `{}`
+• Total EPs : `{}`
+• Average Rating : `{}`
+• Production Company : `{}`
 
 • OverView : <em>{}</em>
 """
 
 ANIME_STR = """
-<b>{}</b> | <b>{}</b>
+**{}** | **{}**
 
-• Category : <pre>{}</pre>
-• Type : <pre>{}</pre>
-• Average Rating : <pre>{}</pre>
-• Status : <pre>{}</pre>
-• First aired : <pre>{}</pre>
-• Last aired : <pre>{}</pre>
-• Runtime : <pre>{} minutes</pre>
-• No of episodes : <pre>{}</pre>
+• Category : `{}`
+• Type : `{}`
+• Average Rating : `{}`
+• Status : `{}`
+• First aired : `{}`
+• Last aired : `{}`
+• Runtime : `{} minutes`
+• No of episodes : `{}`
 
 • Synopsis : <em>{}</em>
 """
 
 MANGA_STR = """
-<b>{}</b> | <b>{}</b>
-• Type : <pre>{}</pre>
-• Average Rating : <pre>{}</pre>
-• Status : <pre>{}</pre>
-• First release : <pre>{}</pre>
-• Last release : <pre>{}</pre>
-• Volume count : <pre>{}</pre>
-• No of chapters : <pre>{}</pre>
-• Serialization : <pre>{}</pre>
+**{}</b> | **{}</b>
+• Type : `{}`
+• Average Rating : `{}`
+• Status : `{}`
+• First release : `{}`
+• Last release : `{}`
+• Volume count : `{}`
+• No of chapters : `{}`
+• Serialization : `{}`
 
 • Synopsis : <em>{}</em>
 """
 
 # Inline Content
 INLINE_STR = """
-• <b>Title</b> : {}
-• <b>Release</b> : <pre>{}</pre>
-• <b>Popularity</b> : <pre>{}</pre>
-• <b>Language</b> : <pre>{}</pre>
-• <b>Average Rating</b> : <pre>{}</pre>
+• **Title</b> : {}
+• **Release</b> : `{}`
+• **Popularity</b> : `{}`
+• **Language</b> : `{}`
+• **Average Rating</b> : `{}`
 
-• <b>OverView</b> : <em>{}</em>
+• **OverView</b> : <em>{}</em>
 """
 
 INLINE_DESC = """
-<b>Usage:</b> <pre>&lt;tv&gt; title</pre> <b>or</b> <pre>&lt;movie&gt; title</pre> <b>in inline query.</b>
+**Usage:</b> `&lt;tv&gt; title` **or</b> `&lt;movie&gt; title` **in inline query.</b>
 
 Examples:
-× <pre>&lt;movie&gt; Avengers Endgame</pre>
-× <pre>&lt;tv&gt; Breaking Bad</pre>
-× <pre>&lt;anime&gt; Attack on Titan</pre>
+× `&lt;movie&gt; Avengers Endgame`
+× `&lt;tv&gt; Breaking Bad`
+× `&lt;anime&gt; Attack on Titan`
 • You can try on buttons below!
 """
 
@@ -111,7 +111,7 @@ music & can view song lyrics using me! Just click the button \
 below to get started with list of possible commands...
 
 You can also search movies, tvshows & \
-anime inline! just type <pre>@acutebot</pre> in \
+anime inline! just type `@acutebot` in \
 your message box and follow the instructions.
 
 And don't forget to smile, atleast once in a while ;)
@@ -125,13 +125,13 @@ I'm fully written in \
 Python3 by <a href="tg://user?id=894380120">starry</a>, \
 feel free to report him if you find any rough edge inside me.
 
-<b>×</b> Bot version : <pre>{__version__}</pre>
-<b>×</b> Python version : <pre>{python_version()}</pre>
-<b>×</b> Library version : <pre>PTB {_libv_}</pre>
-<b>×</b> Movies & TV data : <pre>themoviedb.org</pre>
-<b>×</b> Anime data from : <pre>kitsu.io</pre>
-<b>×</b> Music data from : <pre>deezer.com</pre>
-<b>×</b> Lyrics data from : <pre>genius.com</pre>
+**×</b> Bot version : `{__version__}`
+**×</b> Python version : `{python_version()}`
+**×</b> Library version : `PTB {_libv_}`
+**×</b> Movies & TV data : `themoviedb.org`
+**×</b> Anime data from : `kitsu.io`
+**×</b> Music data from : `deezer.com`
+**×</b> Lyrics data from : `genius.com`
 
 If you enjoyed using me & wanna support my creator \
 hit the donate button below, since he's just a student so \
@@ -146,31 +146,31 @@ for the related functions.
 """
 
 MOVIE_HELP = """
-<b>🗒️ Documentation for Movies & TV related functions:</b>
+**🗒️ Documentation for Movies & TV related functions:</b>
 
-<b>×</b> /movies : Search for info about your favorite movies.
-<b>×</b> /tvshows : Get information for your favotite TV shows.
-<b>×</b> /toprated : (Soon) | View information about top rated, Movie & TV titles.
+**×</b> /movies : Search for info about your favorite movies.
+**×</b> /tvshows : Get information for your favotite TV shows.
+**×</b> /toprated : (Soon) | View information about top rated, Movie & TV titles.
 """
 ANIME_HELP = """
-<b>🗒️ Documentation for Anime & Manga related functionsfunctions:</b>
+**🗒️ Documentation for Anime & Manga related functionsfunctions:</b>
 
-<b>×</b> /anime : Search for info about your favorite anime titles.
-<b>×</b> /manga : Get information about your favorite manga titles.
+**×</b> /anime : Search for info about your favorite anime titles.
+**×</b> /manga : Get information about your favorite manga titles.
 """
 MUSIC_HELP = """
-<b>🗒️ Documentation for music & lyrics related functions:</b>
+**🗒️ Documentation for music & lyrics related functions:</b>
 
-<b>×</b> /music : Download your favorite music in high resolution.
-<b>×</b> /lyrics : Get lyrics for your favorite songs.
-<b>×</b> /nowplaying : Flex you currently or last played song in spotify.
+**×</b> /music : Download your favorite music in high resolution.
+**×</b> /lyrics : Get lyrics for your favorite songs.
+**×</b> /nowplaying : Flex you currently or last played song in spotify.
 """
 MISC_HELP = """
-<b>🗒️ Documentation for some miscs command which don't fit anywhere!</b>
+**🗒️ Documentation for some miscs command which don't fit anywhere!</b>
 
-<b>×</b> /reddit : Gets you random memes scraped from popular subreddits.
-<b>×</b> /subtitle : Download subtitles for your movies.
-<b>×</b> /watchlist : Get list of saved shows from your watchlist :D.
+**×</b> /reddit : Gets you random memes scraped from popular subreddits.
+**×</b> /subtitle : Download subtitles for your movies.
+**×</b> /watchlist : Get list of saved shows from your watchlist :D.
 """
 
 # Errors
@@ -228,7 +228,7 @@ MUSICNOTFOUND = "Sorry i couldn't find that song :("
 
 # Subtitles
 TOSEARCHSUBS = "Please reply with the Movie | Anime name you want subs for."
-SUBS_STR = "🏷 Subtitles for <b>{}</b>.\nClick on buttons below to download!"
+SUBS_STR = "🏷 Subtitles for **{}</b>.\nClick on buttons below to download!"
 
 # Spotify
 SPT_LOGIN = "Hey {}, Please click the button below to login with your spotify account."
