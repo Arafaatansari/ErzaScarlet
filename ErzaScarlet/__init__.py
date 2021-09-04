@@ -6,9 +6,12 @@ import spamwatch
 import telegram.ext as tg
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from telegram.ext import Defaults
 from telegram import ChatAction, ParseMode
 from functools import wraps
+=======
+>>>>>>> parent of f58584b (try but don't cry)
 =======
 >>>>>>> parent of f58584b (try but don't cry)
 =======
