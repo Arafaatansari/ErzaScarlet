@@ -21,11 +21,10 @@ base_url = "https://kitsu.io/api/edge"
 tempdict = {}
 
 
-
 @run_async
 @typing
 def anime(update, context):
-    msg = update.message
+    msg = update.effective_message
     user = update.effective_user
     query = msg.text.replace(" ", "%20")
 
@@ -56,6 +55,7 @@ def anime(update, context):
 
     msg.reply_text(
         f"🔍 Search results for **{msg.text}**:",
+        parse_mode=ParseMode.MARKDOWN,
         reply_markup=InlineKeyboardMarkup(keyb[:6]),
     )
 
@@ -101,6 +101,7 @@ def anime_button(update, context):
             chat_id=chat.id,
             photo=data["posterImage"]["original"],
             caption=sort_caps(caption, c_id=res[x]["id"], anime=True),
+            parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 keyboard(
                     title=data["titles"].get("en"),
@@ -110,13 +111,13 @@ def anime_button(update, context):
             ),
             timeout=60,
             disable_web_page_preview=True,
-            parse_mode=telegram.ParseMode.MARKDOWN
         )
 
     else:
         context.bot.sendMessage(
             chat.id,
             text=caption,
+            parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 keyboard(
                     title=data["titles"].get("en"),
@@ -125,7 +126,6 @@ def anime_button(update, context):
                 )
             ),
             disable_web_page_preview=True,
-            parse_mode=telegram.ParseMode.MARKDOWN
         )
     del tempdict[user_id]
 
@@ -135,7 +135,6 @@ def anime_button(update, context):
 def cancel(update, context):
     context.bot.sendMessage(update.effective_chat.id, (st.CANCEL))
     return ConversationHandler.END
-
 
 
 AN_BUTTON_HANDLER = CallbackQueryHandler(anime_button, pattern=r"anime_")
