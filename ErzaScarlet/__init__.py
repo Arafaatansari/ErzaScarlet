@@ -92,7 +92,7 @@ if ENV:
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", "")
     DURATION_LIMIT = int(os.environ.get("DURATION_LIMIT", "100"))
-    SUDO_USERS = os.environ.get("SUDO_USERS", "").split())
+    SUDO_USERS = os.environ.get("SUDO_USERS", "").split()
     COMMAND_PREFIXES = os.environ.get("TRIGGERS", "/ !").split(" ")
     SESSION_NAME = os.environ.get("SESSION_NAME", "session")
     UPDATES_CHANNEL = os.environ.get("UPDATES_CHANNEL", "ErzaScarlet_justice")
