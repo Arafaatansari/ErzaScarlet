@@ -139,7 +139,7 @@
        "description": "Set this to True if you want ! to be a command prefix along with /. Recommended is True",
        "value": "True"
     },
-    "REDIS_URI": {
+    "REDIS_URL": {
        "description": "redislabs.com go and create one and read readme.md Mandatory Vars.",
        "required": false,
        "value": "redis://:your-redis-default-password@your-redis-endpoint"
