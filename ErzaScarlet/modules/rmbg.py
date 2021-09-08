@@ -54,7 +54,7 @@ async def _(event):
             pass
         else:
             return
-    if "{REM_BG_API_KEY}" is None:
+    if f"{REM_BG_API_KEY}" is None:
         await event.reply("You need API token from remove.bg to use this plugin.")
         return False
     start = datetime.now()
@@ -101,7 +101,7 @@ async def _(event):
 
 def ReTrieveFile(input_file_name):
     headers = {
-        "X-API-Key": "{REM_BG_API_KEY}",
+        "X-API-Key": f"{REM_BG_API_KEY}",
     }
     files = {
         "image_file": (input_file_name, open(input_file_name, "rb")),
