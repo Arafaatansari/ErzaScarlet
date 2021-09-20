@@ -8,17 +8,16 @@ import sys
 from os import execl
 from time import sleep
 from asyncio.exceptions import CancelledError
-from ErzaScarlet.modules.sql.gvar_sql import addgvar, delgvar, gvarstat
 from ErzaScarlet import telethn as bot
 from . import *
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-Heroku = heroku3.from_key(os.environ.get("HEROKU_APP_NAME"))
+Heroku = heroku3.from_key(os.environ.get("HEROKU_API_KEY"))
 heroku_api = "https://api.heroku.com"
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
 HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY")
-lg_id = os.environ.get("JOIN_LOGGER")
+lg_id = os.environ.get("LOGGER_ID")
 
 
 
@@ -52,13 +51,6 @@ async def re(hell):
         LOGS.info(e)
 
 
-@bot.ond(pattern="reload$")
-@bot.on(pattern="reload$", allow_sudo=True)
-async def rel(event):
-    await eor(event, "Reloading Hêllẞø†... Wait for few seconds...")
-    await reload_hellbot()
-
-
 @bot.on(pattern="shutdown$")
 @bot.on(pattern="shutdown$", allow_sudo=True)
 async def down(hell):
@@ -85,51 +77,13 @@ async def sett(event):
         return await hell.edit(f"**Invalid Syntax !!** \n\nTry: `{hl}svar VARIABLE_NAME variable_value`")
     elif valu == "":
         return await hell.edit(f"**Invalid Syntax !!** \n\nTry: `{hl}svar VARIABLE_NAME variable_value`")
-    if var_ not in config_list:
-        return await hell.edit(f"__There isn't any variable named__ `{var_}`. __Check spelling or get full list by__ `{hl}vars`")
-    try:
-        addgvar(var_, valu)
     except Exception as e:
         return await hell.edit(f"**ERROR !!** \n\n`{e}`")
     await hell.edit(f"**Variable** `{var_}` **successfully added with value** `{valu}`")
 
 
-@bot.on(pattern="gvar ?(.*)")
-@bot.on(pattern="gvar ?(.*)", allow_sudo=True)
-async def gett(event):
-    var_ = event.pattern_match.group(1).upper()
-    hell = await eor(event, f"**Getting variable** `{var_}`")
-    if var_ == "":
-        return await hell.edit(f"**Invalid Syntax !!** \n\nTry: `{hl}gvar VARIABLE_NAME`")
-    if var_ not in config_list:
-        return await hell.edit(f"__There isn't any variable named__ `{var_}`. __Check spelling or get full list by `{hl}vars`")
-    try:
-        sql_v = gvarstat(var_)
-        os_v = os.environ.get(var_)
-    except Exception as e:
-        return await hell.edit(f"**ERROR !!** \n\n`{e}`")
-    await hell.edit(f"**OS VARIABLE:** `{var_}`\n**OS VALUE :** `{os_v}`\n------------------\n**SQL VARIABLE:** `{var_}`\n**SQL VALUE :** `{sql_v}`\n")
-
-
-@bot.on(pattern="dvar ?(.*)")
-@bot.on(pattern="dvar ?(.*)", allow_sudo=True)
-async def dell(event):
-    var_ = event.pattern_match.group(1).upper()
-    hell = await eor(event, f"**Deleting Variable** `{var_}`")
-    if var_ == "":
-        return await hell.edit(f"**Invalid Syntax !!** \n\nTry: `{hl}dvar VARIABLE_NAME`")
-    if var_ not in config_list:
-        return await hell.edit(f"__There isn't any variable named__ `{var_}`. Check spelling or get full list by `{hl}vars`")
-    try:
-        delgvar(var_)
-    #    os.environ.pop(var_)
-    except Exception as e:
-        return await hell.edit(f"**ERROR !!** \n\n`{e}`")
-    await hell.edit(f"**Deleted Variable** `{var_}`")
-
-
-@bot.on(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True)
-@bot.on(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", allow_sudo=True)
+@bot.on(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)")
+@bot.on(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)")
 async def variable(hell):
     if hell.fwd_from:
         return
@@ -288,15 +242,15 @@ async def dyno_usage(hell):
 @bot.on(pattern="logs$", allow_sudo=True)
 async def _(dyno):
     if (HEROKU_APP_NAME is None) or (HEROKU_API_KEY is None):
-        return await eor(dyno, f"Make Sure Your HEROKU_APP_NAME & HEROKU_API_KEY are filled correct. Visit for help.", link_preview=False)
+        return await eor(dyno, f"Make Sure Your HEROKU_APP_NAME & HEROKU_API_KEY are filled correct. Visit {hell_grp} for help.", link_preview=False)
     try:
         Heroku = heroku3.from_key(HEROKU_API_KEY)
         app = Heroku.app(HEROKU_APP_NAME)
     except BaseException:
-        return await dyno.reply(f"Make Sure Your Heroku AppName & API Key are filled correct. Visit for help.", link_preview=False)
+        return await dyno.reply(f"Make Sure Your Heroku AppName & API Key are filled correct. Visit {hell_grp} for help.", link_preview=False)
    # event = await eor(dyno, "Downloading Logs...")
     hell_data = app.get_log()
-    await eor(dyno, hell_data, deflink=True, linktext=f"**🗒️ Heroku Logs of 💯 lines. 🗒️**\n\n🌟 **Bot Of :** \n\n🚀** Pasted**  ")
+    await eor(dyno, hell_data, deflink=True, linktext=f"**🗒️ Heroku Logs of 💯 lines. 🗒️**\n\n🌟 **Bot Of :**  {hell_mention}\n\n🚀** Pasted**  ")
     
 
 def prettyjson(obj, indent=2, maxlinelength=80):
