@@ -251,9 +251,9 @@ def info(update: Update, context: CallbackContext):
                 if status in {"left", "kicked"}:
                     text += _stext.format("Not here")
                 elif status == "member":
-                    text += _stext.format("Parasite")
-                elif status in {"administrator", "creator"}:
-                    text += _stext.format("Member of Nines")
+                    text += _stext.format("Guild Members")
+                elif status in {"administrator", "Guild Leader"}:
+                    text += _stext.format("Guild Management Team")
     if user_id not in [bot.id, 777000, 1087968824]:
         userhp = hpmanager(user)
         text += f"\n\n<b>Life Force:</b> <code>{userhp['earnedhp']}/{userhp['totalhp']}</code>\n[ {make_bar(int(userhp['percentage']))} | <code>{userhp['percentage']}%</code> ]"
