@@ -828,7 +828,7 @@ Get information about anime, manga or characters from [AniList](anilist.co).
  ✪ /rmanga | rml <manga>*:* to remove a manga from your list.
  
 ➩ *Anime Fun:*
- ✪ /animequote*:* random anime quote.
+ ✪ /animequotes*:* random anime quote.
  ✪ /meme*:* sends a random anime meme form reddit `r/animemes`.                           
  """
 
