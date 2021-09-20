@@ -4,6 +4,8 @@ from datetime import datetime
 from ErzaScarlet.modules.sql.clear_cmd_sql import get_clearcmd
 from telegram import Bot, Update, ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, CallbackQueryHandler, CallbackContext, run_async
+from ErzaScarlet import dispatcher
+from ErzaScarlet.modules.disable import DisableAbleCommandHandler
 from ErzaScarlet.modules.helper_funcs.misc import delete
 from youtubesearchpython import VideosSearch
 
@@ -162,3 +164,8 @@ def youtube_callback(update: Update, context: CallbackContext):
     if cleartime:
         context.dispatcher.run_async(delete, delmsg, cleartime.time)
 
+
+YOUTUBE_HANDLER = CallbackQueryHandler(["youtube", "yt"], youtube)
+YOUTUBE_CALLBACKHANDLER = CallbackQueryHandler(youtube_callback, pattern='youtube*')
+dispatcher.add_handler(YOUTUBE_HANDLER)
+dispatcher.add_handler(YOUTUBE_CALLBACKHANDLER)
