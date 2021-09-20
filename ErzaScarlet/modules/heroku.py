@@ -16,7 +16,7 @@ Heroku = heroku3.from_key(HEROKU_API_KEY)
 async def variable(var):
     if var.fwd_from:
         return
-    if var.sender_id == OWNER_ID, DEV_USERS:
+    if var.sender_id == DEV_USERS:
         pass
     else:
         return
@@ -105,7 +105,7 @@ async def variable(var):
 async def dyno_usage(dyno):
     if dyno.fwd_from:
         return
-    if dyno.sender_id == OWNER_ID, DEV_USERS:
+    if dyno.sender_id == DEV_USERS:
         pass
     else:
         return
@@ -172,7 +172,7 @@ async def dyno_usage(dyno):
 async def _(dyno):
     if dyno.fwd_from:
         return
-    if dyno.sender_id == OWNER_ID, DEV_USERS:
+    if dyno.sender_id == DEV_USERS:
         pass
     else:
         return
