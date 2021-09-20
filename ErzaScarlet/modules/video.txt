@@ -12,7 +12,7 @@ from youtubesearchpython import VideosSearch
 from youtube_dl import YoutubeDL
 
 
-def youtube(update: Update, context: CallbackContext):
+def yt_search(update: Update, context: CallbackContext):
     bot = context.bot
     message = update.effective_message
     chat = update.effective_chat
