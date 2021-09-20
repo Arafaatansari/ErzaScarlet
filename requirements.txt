@@ -53,3 +53,5 @@ pybase64
 pySmartDL
 validators
 telegraph
+urllib3
+heroku3
