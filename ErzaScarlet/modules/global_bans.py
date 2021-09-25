@@ -497,17 +497,12 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
-*Admins only:*
-`/antispam <on/off/yes/no>`*:* Will toggle our antispam tech or return your current settings.
-
-Anti-Spam, used by bot devs to ban spammers across all groups. This helps protect you and your groups by removing spam flooders as quickly as possible.
-*Note:* Users can appeal gbans or report spammers at @ErzaScarlet_Justice
-
-This also integrates @Spamwatch API to remove Spammers as much as possible from your chatroom!
-*What is SpamWatch?*
-SpamWatch maintains a large constantly updated ban-list of spambots, trolls, bitcoin spammers and unsavoury characters.
-Constantly help banning spammers off from your group automatically So, you wont have to worry about spammers storming your group.
-*Note:* Users can appeal spamwatch bans at @SpamwatchSupport
+**Admin only**:
+ - /antispam <on/off/yes/no>: Check and/or change anti-spam settings.
+ Anti-Spam, used by bot devs to ban spammers across all groups. This helps protect
+ you and your groups by removing spam flooders as quickly as possible.
+ Note: Users can appeal gbans or report spammers at @ErzaScarlet_Justice
+ Erza also integrates @Spamwatch , combot antispam and @Intellivoid's SpamProtectionBot API to remove Spammers as much as possible from your chatroom!
 """
 
 GBAN_HANDLER = CommandHandler("gban", gban)
@@ -523,9 +518,9 @@ dispatcher.add_handler(UNGBAN_HANDLER)
 dispatcher.add_handler(GBAN_LIST)
 dispatcher.add_handler(GBAN_STATUS)
 
-__mod_name__ = "Anti-Spam"
+__mod_name__ = "AntiSpam"
 __handlers__ = [GBAN_HANDLER, UNGBAN_HANDLER, GBAN_LIST, GBAN_STATUS]
 
-if STRICT_GBAN:  # enforce GBANS if this is set
+if STRICT_GBAN:
     dispatcher.add_handler(GBAN_ENFORCER, GBAN_ENFORCE_GROUP)
     __handlers__.append((GBAN_ENFORCER, GBAN_ENFORCE_GROUP))
