@@ -75,6 +75,7 @@ if ENV:
     ANILIST_SECRET = os.environ.get("ANILIST_SECRET")
     ANILIST_REDIRECT_URL = os.environ.get("ANILIST_REDIRECT_URL", "https://anilist.co/api/v2/oauth/pin")
     DOWN_PATH = "ErzaScarlet/downloads/"
+    HELP_DICT = dict()
     DONATION_LINK = os.environ.get("DONATION_LINK")
     LOAD = os.environ.get("LOAD", "").split()
     NO_LOAD = os.environ.get("NO_LOAD", "translation").split()
@@ -172,7 +173,6 @@ else:
     SPAMWATCH_API = Config.SPAMWATCH_API
     INFOPIC = Config.INFOPIC
     REM_BG_API_KEY = Config.REM_BG_API_KEY
-    HELP_DICT = dict()
 
     try:
         BL_CHATS = set(int(x) for x in Config.BL_CHATS or [])
