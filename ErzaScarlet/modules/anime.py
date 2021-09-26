@@ -115,7 +115,8 @@ anime_query = '''
           }
           averageScore
           genres
-          bannerImage
+          image {
+        large
       }
     }
 '''
@@ -156,7 +157,8 @@ query ($id: Int,$search: String) {
           siteUrl
           averageScore
           genres
-          bannerImage
+          image {
+        large
       }
     }
 """
@@ -229,7 +231,7 @@ def anime(update, context):
         description = json.get('description', 'N/A').replace('<i>', '').replace(
             '</i>', '').replace('<br>', '')
         msg += shorten(description, info)
-        image = json.get('bannerImage', None)
+        image = json.get(["image"]["large"], None)
         if trailer:
             buttons = [[
                 InlineKeyboardButton("More Info", url=info),
@@ -342,7 +344,7 @@ def manga(update, context):
         info = json['siteUrl']
         buttons = [[InlineKeyboardButton("More Info", url=info)]]
         buttons += [[InlineKeyboardButton("Add To Read List", callback_data=f"xanime_manga={title}")]]
-        image = json.get("bannerImage", False)
+        image = json.get(["image"]["large"], False)
         msg += f"_{json.get('description', None)}_"
         if image:
             try:
