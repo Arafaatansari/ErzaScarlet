@@ -1,7 +1,7 @@
 from telethon.tl.types import ChannelParticipantsAdmins
 from telethon.utils import get_display_name
 from telethon import *
-from . import API_ID, API_HASH, TOKEN, OWNER_ID as OWNER, telethn as tbot
+from ErzaScarlet import API_ID, API_HASH, TOKEN, OWNER_ID as OWNER, telethn as tbot
 from ErzaScarlet.events import register
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
