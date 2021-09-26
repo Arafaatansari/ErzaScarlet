@@ -63,12 +63,18 @@ if ENV:
     INFOPIC = bool(os.environ.get("INFOPIC", False))
     EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
     WEBHOOK = bool(os.environ.get("WEBHOOK", False))
+    TRIGGERS = os.environ.get("TRIGGERS", "/ !").split(" ")
     URL = os.environ.get("URL", "")  # Does not contain token
     PORT = int(os.environ.get("PORT", 5000))
     CERT_PATH = os.environ.get("CERT_PATH")
     API_ID = os.environ.get("API_ID", None)
     API_HASH = os.environ.get("API_HASH", None)
     DB_URI = os.environ.get("DATABASE_URL")
+    MONGO_DB = os.environ.get("MONGO_DB")
+    ANILIST_CLIENT = os.environ.get("ANILIST_CLIENT")
+    ANILIST_SECRET = os.environ.get("ANILIST_SECRET")
+    ANILIST_REDIRECT_URL = os.environ.get("ANILIST_REDIRECT_URL", "https://anilist.co/api/v2/oauth/pin")
+    DOWN_PATH = "ErzaScarlet/downloads/"
     DONATION_LINK = os.environ.get("DONATION_LINK")
     LOAD = os.environ.get("LOAD", "").split()
     NO_LOAD = os.environ.get("NO_LOAD", "translation").split()
@@ -92,6 +98,7 @@ if ENV:
     IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
+    BOT_USERNAME = os.environ.get("BOT_USERNAME")
     OWNER = list(filter(lambda x: x, map(int, os.environ.get("REQ_OWNER").split())))  ## sudos can be included
     
     
@@ -165,6 +172,7 @@ else:
     SPAMWATCH_API = Config.SPAMWATCH_API
     INFOPIC = Config.INFOPIC
     REM_BG_API_KEY = Config.REM_BG_API_KEY
+    HELP_DICT = dict()
 
     try:
         BL_CHATS = set(int(x) for x in Config.BL_CHATS or [])

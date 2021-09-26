@@ -1,15 +1,6 @@
-import datetime
-import html
-import textwrap
+""" Search for Anime related Info using Anilist API """
 
-import bs4
-import jikanpy
-from telegram.utils.helpers import mention_html
-from ErzaScarlet import OWNER_ID, DRAGONS, REDIS, dispatcher
-from ErzaScarlet.modules.disable import DisableAbleCommandHandler
-from telegram import (InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
-                      Update)
-from telegram.ext import CallbackContext, CallbackQueryHandler, run_async
+
 import asyncio, requests, time, random
 import re
 from pyrogram import filters, Client
@@ -24,7 +15,6 @@ from ErzaScarlet.utils.helper import check_user, get_btns, AUTH_USERS, rand_key,
 from ErzaScarlet.utils.db import get_collection
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
-
 GROUPS = get_collection("GROUPS")
 SFW_GRPS = get_collection("SFW_GROUPS")
 
@@ -36,19 +26,6 @@ no_pic = [
     'https://telegra.ph/file/b5eb1e3606b7d2f1b491f.jpg'
 ]
 
-
-#HEADERS
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0',
-}
-
-info_btn = "More Information"
-kaizoku_btn = "Kaizoku ☠️"
-kayo_btn = "Kayo 🏴‍☠️"
-indi_btn = "Indi"
-prequel_btn = "⬅️ Prequel"
-sequel_btn = "Sequel ➡️"
-close_btn = "❌"
 
 @Client.on_message(filters.command(["anime", f"anime{BOT_USERNAME}"], prefixes=trg))
 async def anime_cmd(client: Client, message: Message):
@@ -704,167 +681,3 @@ async def featured_in_switch_btn(client, cq: CallbackQuery):
     button.append([InlineKeyboardButton(text=f"{bt}", callback_data=f"{reqb}_{idm}_0_{qry}_{pg}_{auth}_{user}")])
     button.append([InlineKeyboardButton(text="🔙 Back", callback_data=f"page_CHARACTER_{qry}_{pg}_{auth}_{user}")])
     await cq.edit_message_media(InputMediaPhoto(pic, caption=msg), reply_markup=InlineKeyboardMarkup(button))
-def site_search(update: Update, context: CallbackContext, site: str):
-    message = update.effective_message
-    args = message.text.strip().split(" ", 1)
-    more_results = True
-
-    try:
-        search_query = args[1]
-    except IndexError:
-        message.reply_text("Give something to search")
-        return
-
-    if site == "kaizoku":
-        search_url = f"https://animekaizoku.com/?s={search_query}"
-        html_text = requests.get(search_url , headers=headers).text
-        soup = bs4.BeautifulSoup(html_text, "html.parser")
-        search_result = soup.find_all("h2", {'class': "post-title"})
-
-        if search_result:
-            result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>: \n"
-            for entry in search_result:
-                post_link = "https://animekaizoku.com/" + entry.a['href']
-                post_name = html.escape(entry.text)
-                result += f"• <a href='{post_link}'>{post_name}</a>\n"
-        else:
-            more_results = False
-            result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>"
-
-    elif site == "kayo":
-        search_url = f"https://kayoanime.com/?s={search_query}"
-        html_text = requests.get(search_url).text
-        soup = bs4.BeautifulSoup(html_text, "html.parser")
-        search_result = soup.find_all("h2", {'class': "post-title"})
-
-        result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>KayoAnime</code>: \n"
-        for entry in search_result:
-
-            if entry.text.strip() == "Nothing Found":
-                result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>KayoAnime</code>"
-                more_results = False
-                break
-
-            post_link = entry.a['href']
-            post_name = html.escape(entry.text.strip())
-            result += f"• <a href='{post_link}'>{post_name}</a>\n"
-           
-    elif site == "indi":
-        search_url = f"https://indianime.com/?s={search_query}"
-        html_text = requests.get(search_url , headers=headers).text
-        soup = bs4.BeautifulSoup(html_text, "html.parser")
-        search_result = soup.find_all("h1", {"class": "elementor-post__title"})
-
-        result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>indianime</code>: \n"
-        for entry in search_result:
-
-            if entry.text.strip() == "Nothing Found":
-                result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>indianime</code>"
-                more_results = False
-                break
-
-            post_link = entry.a['href']
-            post_name = html.escape(entry.text.strip())
-            result += f"• <a href='{post_link}'>{post_name}</a>\n"
-
-    elif site == "anidl":
-        search_url = f"https://anidl.org/?s={search_query}"
-        html_text = requests.get(search_url).text
-        soup = bs4.BeautifulSoup(html_text, "html.parser")
-        search_result = soup.find_all("h2", {'class': "post-title"})
-
-        result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>anidl</code>: \n"
-        for entry in search_result:
-
-            if entry.text.strip() == "Nothing Found":
-                result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>anidl</code>"
-                more_results = False
-                break
-
-            post_link = entry.a['href']
-            post_name = html.escape(entry.text.strip())
-            result += f"• <a href='{post_link}'>{post_name}</a>\n"
-
-    buttons = [[InlineKeyboardButton("See all results", url=search_url)]]
-
-    if more_results:
-        message.reply_text(
-            result,
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(buttons),
-            disable_web_page_preview=True)
-    else:
-        message.reply_text(
-            result, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
-
-
-@run_async
-def kaizoku(update: Update, context: CallbackContext):
-    site_search(update, context, "kaizoku")
-
-
-@run_async
-def kayo(update: Update, context: CallbackContext):
-    site_search(update, context, "kayo")
-    
-@run_async
-def indi(update: Update, context: CallbackContext):
-    site_search(update, context, "indi")
-
-@run_async
-def anidl(update: Update, context: CallbackContext):
-    site_search(update, context, "anidl")    
-    
-    
-#plugin by t.me/RCage
-@run_async
-def meme(update: Update, context: CallbackContext):
-    msg = update.effective_message
-    meme = requests.get("https://meme-api.herokuapp.com/gimme/Animemes/").json()
-    image = meme.get("url")
-    caption = meme.get("title")
-    if not image:
-        msg.reply_text("No URL was received from the API!")
-        return
-    msg.reply_photo(
-                photo=image, caption=caption)
-                
-                
-                
-__help__ = """
-Get information about anime, manga or characters from [AniList](anilist.co).
-*Available commands:*
-                               
-➩ *Anime search:*                            
- ✪ /anime <anime>*:* returns information about the anime.
- ✪ /whatanime*:* returns source of anime when replied to photo or gif.                                                          
- ✪ /character <character>*:* returns information about the character.
- ✪ /manga <manga>*:* returns information about the manga.
- ✪ /user <user>*:* returns information about a Anilist user.
- ✪ /airing <anime>*:* returns anime airing info.
- ✪ /indi <anime>*:* search an anime on indianime.com
- ✪ /kaizoku <anime>*:* search an anime on animekaizoku.com
- ✪ /kayo <anime>*:* search an anime on animekayo.com
- ✪ /anidl <anime>*:* search an anime on anidl.org
-                               
- 
-➩ *Anime Fun:*
- ✪ /animequotes*:* random anime quote.
- ✪ /meme*:* sends a random anime meme form reddit `r/animemes`.                           
- """
-
-
-KAIZOKU_SEARCH_HANDLER = DisableAbleCommandHandler("kaizoku", kaizoku)
-KAYO_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo)
-INDI_SEARCH_HANDLER = DisableAbleCommandHandler("indi", indi)
-ANIDL_SEARCH_HANDLER = DisableAbleCommandHandler("anidl", anidl)
-MEME_HANDLER = DisableAbleCommandHandler("meme", meme)
-
-
-dispatcher.add_handler(KAIZOKU_SEARCH_HANDLER)
-dispatcher.add_handler(KAYO_SEARCH_HANDLER)
-dispatcher.add_handler(INDI_SEARCH_HANDLER)
-dispatcher.add_handler(ANIDL_SEARCH_HANDLER)
-dispatcher.add_handler(MEME_HANDLER)
-
-__mod_name__ = "Anime"
