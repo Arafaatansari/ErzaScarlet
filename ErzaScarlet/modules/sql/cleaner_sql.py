@@ -185,12 +185,12 @@ def __load_cleaner_list():
     global CLEANER_CHATS
 
 #RESET Spot
-    '''try:
+    try:
         GLOBAL_IGNORE_COMMANDS = {
             int(x.command) for x in SESSION.query(CleanerBlueTextGlobal).all()
         }
     finally:
-        SESSION.close()'''
+        SESSION.close()
 
     try:
         for x in SESSION.query(CleanerBlueTextChatSettings).all():
