@@ -27,7 +27,7 @@ no_pic = [
 ]
 
 
-@Client.on_message(filters.command(["anime", f"anime{BOT_USERNAME}"], prefixes=trg))
+@Client.on_message(filters.command(["ani", f"ani{BOT_USERNAME}"], prefixes=trg))
 async def anime_cmd(client: Client, message: Message):
     """Search Anime Info"""
     text = message.text.split(" ", 1)
@@ -61,7 +61,7 @@ async def anime_cmd(client: Client, message: Message):
     await client.send_photo(message.chat.id, title_img, caption=finals_, reply_markup=buttons)
 
 
-@Client.on_message(filters.command(["manga", f"manga{BOT_USERNAME}"], prefixes=trg))
+@Client.on_message(filters.command(["mang", f"mang{BOT_USERNAME}"], prefixes=trg))
 async def manga_cmd(client: Client, message: Message):
     """Search Manga Info"""
     text = message.text.split(" ", 1)
@@ -94,7 +94,7 @@ async def manga_cmd(client: Client, message: Message):
     await client.send_photo(message.chat.id, pic, caption=finals_, reply_markup=buttons)
 
 
-@Client.on_message(filters.command(["character", f"character{BOT_USERNAME}"], prefixes=trg))
+@Client.on_message(filters.command(["charac", f"charac{BOT_USERNAME}"], prefixes=trg))
 async def character_cmd(client: Client, message: Message):
     """Get Info about a Character"""
     text = message.text.split(" ", 1)
@@ -147,7 +147,7 @@ async def anilist_cmd(client: Client, message: Message):
     await client.send_photo(message.chat.id, pic, caption=msg, reply_markup=buttons)
 
 
-@Client.on_message(filters.command(["stats", f"stats{BOT_USERNAME}", "user", f"user{BOT_USERNAME}"], prefixes=trg))
+@Client.on_message(filters.command(["flex", f"flex{BOT_USERNAME}", "user", f"user{BOT_USERNAME}"], prefixes=trg))
 async def flex_cmd(client: Client, message: Message):
     query = message.text.split(" ", 1)
     qry = None
@@ -190,7 +190,7 @@ async def top_tags_cmd(client: Client, message: Message):
     await client.send_message(message.chat.id, msg, reply_markup=buttons)
 
 
-@Client.on_message(filters.command(["airing", f"airing{BOT_USERNAME}"], prefixes=trg))
+@Client.on_message(filters.command(["air", f"air{BOT_USERNAME}"], prefixes=trg))
 async def airing_cmd(client: Client, message: Message):
     """Get Airing Detail of Anime"""
     text = message.text.split(" ", 1)
@@ -285,7 +285,7 @@ async def activity_cmd(client: Client, message: Message):
             "Please connect your account first to use this cmd",
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Auth", url=f"https://t.me/{bot_us}/?start=auth")]])
         )
-    result = await get_user(None, "stats", user)
+    result = await get_user(None, "flex", user)
     query = result[0].split("/").pop().split("?")[0]
     result = await get_user_activity(int(query), user=int(user))
     pic, msg, kek = result
@@ -303,7 +303,7 @@ async def favourites_cmd(client: Client, message: Message):
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Auth", url=f"https://t.me/{bot_us}/?start=auth")]])
         )
     q = message.from_user.id
-    result = await get_user(None, "stats", user)
+    result = await get_user(None, "flex", user)
     query = result[0].split("/").pop().split("?")[0]
     btn = InlineKeyboardMarkup(
         [   
