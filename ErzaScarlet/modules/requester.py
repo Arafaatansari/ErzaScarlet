@@ -1,7 +1,7 @@
 from telethon.tl.types import ChannelParticipantsAdmins
 from telethon.utils import get_display_name
 from telethon import *
-from ErzaScarlet import API_ID, API_HASH, TOKEN, OWNER_ID as OWNER, telethn as tbot
+from ErzaScarlet import API_ID, API_HASH, TOKEN, OWNER , telethn as tbot
 from ErzaScarlet.events import register
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
@@ -11,7 +11,7 @@ IN_GRP = -1001415010098
 bot = asst = tbot
 REQ_GO =  -1001509437008
 on = tbot.on
-auth = 953362604
+auth = OWNER 
 
 
 @tbot.on(events.NewMessage(chats=IN_GRP))
