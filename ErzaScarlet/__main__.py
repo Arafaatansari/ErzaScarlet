@@ -213,7 +213,7 @@ def start(update: Update, context: CallbackContext):
                             ),
                             InlineKeyboardButton(
                                 text="Support Group",
-                                callback_data="help_back",
+                                url=f"https://t.me/{SUPPORT_CHAT}",
                             ),
                         ],
                     ],
