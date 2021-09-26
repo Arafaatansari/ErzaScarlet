@@ -64,7 +64,7 @@ Hey I Am {}
 
 I can manage your group easily with many feautres and games. **Just add me in your group to use me.
 
-*Status*: [Working Fine](https://t.me/ErzaScarlet_Justice)
+*Status*: [Working Fine](https://t.me/ErzaScarlet_Support)
 *Life Force*: `100%`
 
 Too see commands send /help .

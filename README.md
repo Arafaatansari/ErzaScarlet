@@ -1,6 +1,6 @@
 ![ErzaScarlet](https://telegra.ph/file/343adbad88ced796bc03a.jpg)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6141417ceaf84545bab6bd671503df51)](https://app.codacy.com/gh/noobsohail/ErzaScarlet?utm_source=github.com&utm_medium=referral&utm_content=noobsohail/ErzaScarlett&utm_campaign=Badge_Grade_Settings)  [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://perso.crans.org/besson/LICENSE.html) [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) [![Updates channel!](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/ErzaScarlet_Justice)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6141417ceaf84545bab6bd671503df51)](https://app.codacy.com/gh/noobsohail/ErzaScarlet?utm_source=github.com&utm_medium=referral&utm_content=noobsohail/ErzaScarlett&utm_campaign=Badge_Grade_Settings)  [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://perso.crans.org/besson/LICENSE.html) [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) [![Updates channel!](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/ErzaScarlet_Support)
 
 # ErzaScarlet 
 Erza Scarlet is the female deuteragonist of the anime/manga series Fairy Tail. She is an S-class Mage from the Guild Fairy Tail. Like most Fairy Tail members, she shows great loyalty and dedication to Makarov and the guild.
@@ -30,7 +30,7 @@ Now save your redis url in this format </br> redis://:your-redis-default-passwor
     [-] OWNER_ID: ur id
     [-] JOIN_LOGGER: Channel Id E.g. -1004672929 
     [-] EVENT_LOGS: Channel Id E.g. -1004672929 
-    [-] SUPPORT_CHAT': 'Your Public channel name like @ErzaScarlet_Justice'
+    [-] SUPPORT_CHAT': 'Your Public channel name like @ErzaScarlet_Support'
 [+] The ErzaScarlet won't run without setting the mandatory vars.
 ```
 
