@@ -211,31 +211,9 @@ def start(update: Update, context: CallbackContext):
                                     context.bot.username,
                                 ),
                             ),
-                        ],
-                        [
                             InlineKeyboardButton(
                                 text="Support Group",
                                 url=f"https://t.me/{SUPPORT_CHAT}",
-                            ),
-                            InlineKeyboardButton(
-                                text="Anime Group",
-                                url="https://t.me/indianimein",
-                            ),
-                        ],
-                        [
-                            InlineKeyboardButton(
-                                text="Anime Channel",
-                                url="https://t.me/indianimei",
-                            ),
-                            InlineKeyboardButton(
-                                text="Anime Index",
-                                url="https://t.me/IndiAnimeNetwork",
-                            ),
-                        ],
-                        [
-                            InlineKeyboardButton(
-                                text="IndiAnime Network",
-                                url="https://t.me/IndiAnimeNetwork",
                             ),
                         ],
                     ],
