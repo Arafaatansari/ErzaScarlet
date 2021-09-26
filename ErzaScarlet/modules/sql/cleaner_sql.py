@@ -184,6 +184,14 @@ def __load_cleaner_list():
     global GLOBAL_IGNORE_COMMANDS
     global CLEANER_CHATS
 
+#RESET Spot
+    '''try:
+        GLOBAL_IGNORE_COMMANDS = {
+            int(x.command) for x in SESSION.query(CleanerBlueTextGlobal).all()
+        }
+    finally:'''
+        SESSION.close()
+
     try:
         for x in SESSION.query(CleanerBlueTextChatSettings).all():
             CLEANER_CHATS.setdefault(x.chat_id, {
