@@ -91,6 +91,7 @@ anime_query = '''
           romaji
           english
           native
+          'IndiAnime'
         }
         description (asHtml: false)
         startDate{
