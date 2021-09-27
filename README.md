@@ -7,7 +7,7 @@ Erza Scarlet is the female deuteragonist of the anime/manga series Fairy Tail. S
 
 </br>
 
-We created this bot by inspired from [SaitamRobot](https://github.com/AnimeKaizoku). Which was originally forked of Marie bot which was developed by [PaulSonOfLArs](https://t.me/PaulSonofLars). You can't say we directly copied everything from [SaitamRobot](https://github.com/AnimeKaizoku). This repo have too many bugs we fixed and re write whole code and add other hundreds modules too make bot enjoyable for you. We hope you show us our support. Give this repo <b>5 Star & Fork & Deploy</b>. If you have any query regarding this bot contact us on our support group we are available thier to help you
+We created this bot by inspired from [SaitamRobot](https://github.com/AnimeKaizoku). Which was originally forked of Marie bot which was developed by [PaulSonOfLArs](https://t.me/PaulSonofLars). You can't say we directly copied everything from [SaitamRobot](https://github.com/AnimeKaizoku). This repo have too many bugs we fixed and re write whole code and add other hundreds modules too make bot enjoyable for you. We hope you show us your support. Give this repo <b>5 Star & Fork & Deploy</b>. If you have any query regarding this bot contact us on our support group we are available thier to help you
 <br>
 </br>
 
