@@ -307,7 +307,6 @@ def manga(update, context):
         update.effective_message.reply_text('Format : /manga < manga name >')
         return
     search = search[1]
-    manga_id = json['id']
     variables = {'search': search}
     json = requests.post(
         url, json={
@@ -340,6 +339,7 @@ def manga(update, context):
         for x in json.get('genres', []):
             msg += f"{x}, "
         msg = msg[:-2]
+        manga_id = json['id']
         info = json['siteUrl']
         buttons = [[InlineKeyboardButton("More Info", url=info)]]
         buttons += [[InlineKeyboardButton("Add To Read List", callback_data=f"xanime_manga={title}")]]
