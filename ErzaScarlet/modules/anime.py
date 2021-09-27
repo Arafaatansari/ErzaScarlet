@@ -307,6 +307,7 @@ def manga(update, context):
         update.effective_message.reply_text('Format : /manga < manga name >')
         return
     search = search[1]
+    manga_id = json['id']
     variables = {'search': search}
     json = requests.post(
         url, json={
