@@ -339,7 +339,7 @@ def manga(update, context):
         for x in json.get('genres', []):
             msg += f"{x}, "
         msg = msg[:-2]
-        manga_id = json.get('id', []):
+        manga_id = json.get('id')
         info = json['siteUrl']
         buttons = [[InlineKeyboardButton("More Info", url=info)]]
         buttons += [[InlineKeyboardButton("Add To Read List", callback_data=f"xanime_manga={title}")]]
