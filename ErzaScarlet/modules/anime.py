@@ -85,7 +85,7 @@ query ($id: Int) {
 
 anime_query = '''
    query ($id: Int,$search: String) { 
-      Media (id: $id, type: ANIME,search: $search, IndiAnime) { 
+      Media (id: $id, type: ANIME,search: $search) { 
         id
         title {
           romaji
@@ -229,7 +229,7 @@ def anime(update, context):
         description = json.get('description', 'N/A').replace('<i>', '').replace(
             '</i>', '').replace('<br>', '')
         msg += shorten(description, info)
-        image = f"https://img.anili.st/media/{id}"
+        image = f"https://telegra.ph/file/d0993e73fd64d27042188.jpg/{id}"
         if trailer:
             buttons = [[
                 InlineKeyboardButton("More Info", url=info),
