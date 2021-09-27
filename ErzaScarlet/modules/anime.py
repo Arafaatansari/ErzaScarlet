@@ -85,13 +85,12 @@ query ($id: Int) {
 
 anime_query = '''
    query ($id: Int,$search: String) { 
-      Media (id: $id, type: ANIME,search: $search) { 
+      Media (id: $id, type: ANIME,search: $search, IndiAnime) { 
         id
         title {
           romaji
           english
           native
-          'IndiAnime'
         }
         description (asHtml: false)
         startDate{
