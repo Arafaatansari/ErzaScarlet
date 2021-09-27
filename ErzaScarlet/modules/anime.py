@@ -229,7 +229,7 @@ def anime(update, context):
         description = json.get('description', 'N/A').replace('<i>', '').replace(
             '</i>', '').replace('<br>', '')
         msg += shorten(description, info)
-        image = f"https://telegra.ph/file/d0993e73fd64d27042188.jpg/{anime_id}"
+        image = f"https://img.anili.st/media/{id}"
         if trailer:
             buttons = [[
                 InlineKeyboardButton("More Info", url=info),
@@ -339,7 +339,7 @@ def manga(update, context):
         for x in json.get('genres', []):
             msg += f"{x}, "
         msg = msg[:-2]
-        manga_id = json['id']
+        manga_id = json.get('id', []):
         info = json['siteUrl']
         buttons = [[InlineKeyboardButton("More Info", url=info)]]
         buttons += [[InlineKeyboardButton("Add To Read List", callback_data=f"xanime_manga={title}")]]
