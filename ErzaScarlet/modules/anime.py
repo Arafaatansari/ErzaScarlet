@@ -229,7 +229,7 @@ def anime(update, context):
         description = json.get('description', 'N/A').replace('<i>', '').replace(
             '</i>', '').replace('<br>', '')
         msg += shorten(description, info)
-        image = f"https://telegra.ph/file/d0993e73fd64d27042188.jpg/{id}"
+        image = f"https://telegra.ph/file/d0993e73fd64d27042188.jpg/{anime_id}"
         if trailer:
             buttons = [[
                 InlineKeyboardButton("More Info", url=info),
