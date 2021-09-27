@@ -342,7 +342,7 @@ def manga(update, context):
         info = json['siteUrl']
         buttons = [[InlineKeyboardButton("More Info", url=info)]]
         buttons += [[InlineKeyboardButton("Add To Read List", callback_data=f"xanime_manga={title}")]]
-        image = json.get("bannerImage", False)
+        image = f"https://img.anili.st/media/{id}"
         msg += f"_{json.get('description', None)}_"
         if image:
             try:
