@@ -195,10 +195,10 @@ Get information about anime, manga or characters with the help of this module! A
 __mod_name__ = "MyAnimeList"
         
         
-ANIME_HANDLER = CommandHandler("manime", pass_args=True)
-CHARACTER_HANDLER = CommandHandler("mcharacter", pass_args=True)
-UPCOMING_HANDLER = CommandHandler("mupcoming")
-MANGA_HANDLER = CommandHandler("mmanga", pass_args=True)
+ANIME_HANDLER = CommandHandler("manime", manime)
+CHARACTER_HANDLER = CommandHandler("mcharacter", mcharacter)
+UPCOMING_HANDLER = CommandHandler("mupcoming" mupcoming)
+MANGA_HANDLER = CommandHandler("mmanga", mmanga)
 
 dispatcher.add_handler(MANIME_HANDLER)
 dispatcher.add_handler(MCHARACTER_HANDLER)
