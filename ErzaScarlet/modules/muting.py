@@ -23,6 +23,7 @@ from ErzaScarlet.modules.helper_funcs.extraction import (
 )
 from ErzaScarlet.modules.helper_funcs.string_handling import extract_time
 from ErzaScarlet.modules.helper_funcs.admin_rights import user_can_ban
+from ErzaScarlet.modules.helper_funcs.alternate import typing_action
 from ErzaScarlet.modules.log_channel import loggable
 
 
