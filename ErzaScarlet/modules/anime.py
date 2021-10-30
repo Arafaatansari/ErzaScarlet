@@ -725,7 +725,7 @@ def site_search(update: Update, context: CallbackContext, site: str):
         search_url = f"https://indianime.com/?s={search_query}"
         html_text = requests.get(search_url , headers=headers).text
         soup = bs4.BeautifulSoup(html_text, "html.parser")
-        search_result = soup.find_all("h1", {"class": "elementor-post__title"})
+        search_result = soup.find_all("h2", {"class": "post-title"})
 
         result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>indianime</code>: \n"
         for entry in search_result:
