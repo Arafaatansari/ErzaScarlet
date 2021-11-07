@@ -3,7 +3,6 @@
 from logging import info
 from jikanpy import Jikan
 from jikanpy.exceptions import APIException
-from anime import animestuffs
 
 from telegram import Message, Chat, User, ParseMode, Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
