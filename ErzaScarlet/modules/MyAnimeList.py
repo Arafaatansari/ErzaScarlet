@@ -43,8 +43,6 @@ def anime(update: Update, context: CallbackContext):
         japanese = anime.get("title_japanese")
         type = anime.get("type")
         duration = anime.get("duration")
-        synopsis = anime.get("synopsis", 'N/A').replace('<i>', '').replace(
-            '</i>', '').replace('<br>', '')
         source = anime.get("source")
         status = anime.get("status")
         episodes = anime.get("episodes")
@@ -64,6 +62,9 @@ def anime(update: Update, context: CallbackContext):
         premiered = anime.get("premiered")
         image_url = anime.get("image_url")
         url = anime.get("url")
+        synopsis = anime.get('description', 'N/A').replace('<i>', '').replace(
+            '</i>', '').replace('<br>', '')
+        msg += shorten(synopsis, url)
         trailer = anime.get("trailer_url")
     else:
         msg.reply_text("No results found!")
@@ -81,7 +82,6 @@ def anime(update: Update, context: CallbackContext):
     rep += f"<b>Rating:</b> <code>{rating}</code>\n\n"
     rep += f"<a href='{image_url}'>\u200c</a>"
     rep += f"<i>{synopsis}</i>\n"
-    rep += shorten(synopsis, url)
     if trailer:
         keyb = [
             [InlineKeyboardButton("More Information", url=url),
