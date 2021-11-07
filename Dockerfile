@@ -32,6 +32,7 @@ RUN apt update && apt upgrade -y && \
     libpq-dev \
     libcurl4-openssl-dev \
     libxml2-dev \
+    npm \
     libxslt1-dev \
     python3-pip \
     python3-requests \
