@@ -78,7 +78,7 @@ def anime(update: Update, context: CallbackContext):
         premiered = anime.get("premiered")
         image_url = f"https://img.anili.st/media/{anime_id}"
         url = anime.get("url")
-        description = json.get('synopsis', 'N/A').replace('<i>', '').replace(
+        description = anime.get('synopsis', 'N/A').replace('<i>', '').replace(
             '</i>', '').replace('<br>', '')
         trailer = anime.get("trailer_url")
     else:
@@ -95,7 +95,7 @@ def anime(update: Update, context: CallbackContext):
     rep += f"<b>Studios:</b> <code>{studios}</code>\n"
     rep += f"<b>Premiered:</b> <code>{premiered}</code>\n"
     rep += f"<b>Rating:</b> <code>{rating}</code>\n\n"
-    rep += f"<b>description(s):</b> <code>{description}</code>\n"
+    rep += f"<b>Description:</b>\n\n <i>{description}</i>\n"
     rep += shorten(description, url)
     rep += f"<a href='{image_url}'>\u200c</a>"
     if trailer:
