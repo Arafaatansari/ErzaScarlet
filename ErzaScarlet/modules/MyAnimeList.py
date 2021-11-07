@@ -12,7 +12,7 @@ jikan = Jikan()
 
 
 @run_async
-def manime(update: Update, context: CallbackContext):
+def anime(update: Update, context: CallbackContext):
     msg = update.effective_message
     args = context.args
     query = " ".join(args)
@@ -85,7 +85,7 @@ def manime(update: Update, context: CallbackContext):
     
 
 @run_async
-def mcharacter(update: Update, context: CallbackContext):
+def character(update: Update, context: CallbackContext):
     msg = update.effective_message
     res = ""
     args = context.args
@@ -120,7 +120,7 @@ def mcharacter(update: Update, context: CallbackContext):
         
         
 @run_async
-def mupcoming(update: Update, context: CallbackContext):
+def upcoming(update: Update, context: CallbackContext):
     msg = update.effective_message
     rep = "<b>Upcoming anime</b>\n"
     later = jikan.season_later()
@@ -135,7 +135,7 @@ def mupcoming(update: Update, context: CallbackContext):
     
     
 @run_async
-def mmanga(update: Update, context: CallbackContext):
+def manga(update: Update, context: CallbackContext):
     msg = update.effective_message
     args = context.args
     query = " ".join(args)
@@ -195,12 +195,12 @@ Get information about anime, manga or characters with the help of this module! A
 __mod_name__ = "MyAnimeList"
         
         
-ANIME_HANDLER = CommandHandler("manime", manime)
-CHARACTER_HANDLER = CommandHandler("mcharacter", mcharacter)
-UPCOMING_HANDLER = CommandHandler("mupcoming" mupcoming)
-MANGA_HANDLER = CommandHandler("mmanga", mmanga)
+ANIME_HANDLER = CommandHandler("manime", anime, pass_args=True)
+CHARACTER_HANDLER = CommandHandler("mcharacter", character, pass_args=True)
+UPCOMING_HANDLER = CommandHandler("mupcoming", upcoming)
+MANGA_HANDLER = CommandHandler("mmanga", manga, pass_args=True)
 
-dispatcher.add_handler(MANIME_HANDLER)
-dispatcher.add_handler(MCHARACTER_HANDLER)
-dispatcher.add_handler(MUPCOMING_HANDLER)
-dispatcher.add_handler(MMANGA_HANDLER)
+dispatcher.add_handler(ANIME_HANDLER)
+dispatcher.add_handler(CHARACTER_HANDLER)
+dispatcher.add_handler(UPCOMING_HANDLER)
+dispatcher.add_handler(MANGA_HANDLER)
