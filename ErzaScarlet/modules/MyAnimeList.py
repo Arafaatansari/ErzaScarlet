@@ -13,9 +13,9 @@ def shorten(synopsis, url='https://myanimelist.net/anime'):
     rep = ""
     if len(synopsis) > 700:
         synopsis = synopsis[0:500] + '....'
-        rep += f"\n<b>Description</b>:\n<i>{synopsis}</i> <a href="{url}>" [Read More] </a>"
+        rep += f"\n<b>Description</b>:\n<i>{synopsis}</i><a href='{url}'>\Read More</a>"
     else:
-        rep += f"\n<b>Description</b>:\n_{synopsis}_"
+        rep += f"\n<b>Description</b>:\n_{synopsis}</i>"
     return rep
 
 
@@ -116,7 +116,7 @@ def anime(update: Update, context: CallbackContext):
     else:
         update.effective_message.reply_text(
             rep,
-            parse_mode=ParseMode.MARKDOWN,
+            parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(keyb))
 
 
