@@ -13,9 +13,9 @@ def shorten(synopsis, url='https://myanimelist.net/anime'):
     rep = ""
     if len(synopsis) > 700:
         synopsis = synopsis[0:500] + '....'
-        rep += f"\n*Description*:\n_{synopsis}_[Read More]({url})"
+        rep += f"\n<b>Description</b>:\n<i>{synopsis}</i> <a href="{url}>" [Read More] </a>"
     else:
-        rep += f"\n*Description*:\n_{synopsis}_"
+        rep += f"\n<b>Description</b>:\n_{synopsis}_"
     return rep
 
 
