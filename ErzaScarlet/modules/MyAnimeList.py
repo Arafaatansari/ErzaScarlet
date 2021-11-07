@@ -11,16 +11,6 @@ from ErzaScarlet import dispatcher
 
 jikan = Jikan()
 
-def shorten(synopsis, info='https://myanimelist.net/anime/'):
-    res = ""
-    if len(synopsis) > 700:
-        synopsis = synopsis[0:500] + '....'
-        res += f"\n*synopsis*:\n_{synopsis}_[Read More]({info})"
-    else:
-        res += f"\n*synopsis*:\n_{synopsis}_"
-    return res
-
-
 @run_async
 def anime(update: Update, context: CallbackContext):
     msg = update.effective_message
@@ -58,13 +48,11 @@ def anime(update: Update, context: CallbackContext):
         for studio in studio_lst:
             studios += studio.get("name") + ", "
         studios = studios[:-2]
+        anime_id = anime.get("mal_id")
         duration = anime.get("duration")
         premiered = anime.get("premiered")
-        image_url = anime.get("image_url")
+        image_url = f"https://img.anili.st/media/{anime_id}"
         url = anime.get("url")
-        synopsis = anime.get('description', 'N/A').replace('<i>', '').replace(
-            '</i>', '').replace('<br>', '')
-        res += shorten(synopsis, url)
         trailer = anime.get("trailer_url")
     else:
         msg.reply_text("No results found!")
@@ -81,7 +69,6 @@ def anime(update: Update, context: CallbackContext):
     rep += f"<b>Premiered:</b> <code>{premiered}</code>\n"
     rep += f"<b>Rating:</b> <code>{rating}</code>\n\n"
     rep += f"<a href='{image_url}'>\u200c</a>"
-    rep += f"<i>{synopsis}</i>\n"
     if trailer:
         keyb = [
             [InlineKeyboardButton("More Information", url=url),
