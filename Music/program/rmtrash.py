@@ -6,7 +6,7 @@ from pyrogram.types import Message
 from Music.driver.filters import command, other_filters
 from Music.driver.decorators import sudo_users_only, errors
 
-downloads = os.path.realpath("program/downloads")
+downloads = os.path.realpath("Music/program/downloads")
 raw = os.path.realpath(".")
 
 @Client.on_message(command(["rmd", "clear"]) & ~filters.edited)
