@@ -1,4 +1,5 @@
 # Module to get info about anime, characters, manga etc. by @TheRealPhoenix
+#This module re written by @noobsohail - github | @sohailkhan_anime - telegram
 
 from logging import info
 from jikanpy import Jikan
