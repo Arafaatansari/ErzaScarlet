@@ -64,7 +64,7 @@ def anime(update: Update, context: CallbackContext):
         url = anime.get("url")
         synopsis = anime.get('description', 'N/A').replace('<i>', '').replace(
             '</i>', '').replace('<br>', '')
-        msg += shorten(synopsis, url)
+        res += shorten(synopsis, url)
         trailer = anime.get("trailer_url")
     else:
         msg.reply_text("No results found!")
