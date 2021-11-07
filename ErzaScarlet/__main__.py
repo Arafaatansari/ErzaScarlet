@@ -641,7 +641,7 @@ if __name__ == "__main__":
 
 import asyncio
 from pytgcalls import idle
-from driver.veez import call_py, bot
+from Music.driver.veez import call_py, bot
 
 async def mulai_bot():
     print("[INFO]: STARTING BOT CLIENT")
