@@ -9,13 +9,13 @@ from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 
 from ErzaScarlet import dispatcher
 
-def shorten(description, info='https://myanimelist.net/anime'):
+def shorten(synopsis, url='https://myanimelist.net/anime'):
     rep = ""
-    if len(description) > 700:
-        description = description[0:500] + '....'
-        rep += f"\n*Description*:\n_{description}_[Read More]({info})"
+    if len(synopsis) > 700:
+        synopsis = synopsis[0:500] + '....'
+        rep += f"\n*Description*:\n_{synopsis}_[Read More]({url})"
     else:
-        rep += f"\n*Description*:\n_{description}_"
+        rep += f"\n*Description*:\n_{synopsis}_"
     return rep
 
 
@@ -78,9 +78,9 @@ def anime(update: Update, context: CallbackContext):
         premiered = anime.get("premiered")
         image_url = f"https://img.anili.st/media/{anime_id}"
         url = anime.get("url")
-        description = anime.get('synopsis', 'N/A').replace('<i>', '').replace(
+        synopsis = anime.get('synopsis', 'N/A').replace('<i>', '').replace(
             '</i>', '').replace('<br>', '')
-        res += shorten(description, url)    
+        shorten(synopsis, url)    
         trailer = anime.get("trailer_url")
     else:
         msg.reply_text("No results found!")
@@ -96,7 +96,7 @@ def anime(update: Update, context: CallbackContext):
     rep += f"<b>Studios:</b> <code>{studios}</code>\n"
     rep += f"<b>Premiered:</b> <code>{premiered}</code>\n"
     rep += f"<b>Rating:</b> <code>{rating}</code>\n\n"
-    rep += f"<b>Description:</b>\n\n <i>{description}</i>\n"
+    rep += f"<b>Synopsis:</b>\n\n <i>{synopsis}</i>\n"
     rep += shorten(description, url)
     rep += f"<a href='{image_url}'>\u200c</a>"
     if trailer:
