@@ -2,7 +2,7 @@
 
 from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
-from config import (
+from Music.config import (
     ASSISTANT_NAME,
     BOT_NAME,
     BOT_USERNAME,

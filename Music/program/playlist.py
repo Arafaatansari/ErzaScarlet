@@ -2,11 +2,11 @@
 # Commit Start Date 20/10/2021
 # Finished On 28/10/2021
 
-from config import BOT_USERNAME
+from Music.config import BOT_USERNAME
 from pyrogram.types import Message
-from driver.filters import command, other_filters
+from Music.driver.filters import command, other_filters
 from pyrogram import Client, filters
-from driver.queues import QUEUE, get_queue
+from Music.driver.queues import QUEUE, get_queue
 
 
 @Client.on_message(command(["playlist", f"playlist@{BOT_USERNAME}", "queue", f"queue@{BOT_USERNAME}"]) & other_filters)

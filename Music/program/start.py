@@ -2,7 +2,7 @@ from datetime import datetime
 from sys import version_info
 from time import time
 
-from config import (
+from Music.config import (
     ALIVE_IMG,
     ALIVE_NAME,
     BOT_NAME,
@@ -11,8 +11,8 @@ from config import (
     OWNER_NAME,
     UPDATES_CHANNEL,
 )
-from program import __version__
-from driver.filters import command, other_filters
+from Music.program import __version__
+from Music.driver.filters import command, other_filters
 from pyrogram import Client, filters
 from pyrogram import __version__ as pyrover
 from pytgcalls import (__version__ as pytover)
