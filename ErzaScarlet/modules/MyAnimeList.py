@@ -92,12 +92,11 @@ def anime(update: Update, context: CallbackContext):
                     msg,
                     parse_mode=ParseMode.HTML,
                     reply_markup=InlineKeyboardMarkup(keyb))
-        else:
+    else:
             update.effective_message.reply_text(
                 msg,
-                parse_mode=ParseMode.HTML,
-                reply_markup=InlineKeyboardMarkup(keyb))     
-    
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(buttons))
 
 @run_async
 def character(update: Update, context: CallbackContext):
