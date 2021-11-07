@@ -13,7 +13,7 @@ def shorten(synopsis, url='https://myanimelist.net/anime'):
     rep = ""
     if len(synopsis) > 700:
         synopsis = synopsis[0:500] + '....'
-        rep += f"\n<b>Description</b>:\n<i>{synopsis}</i><a href='{url}'>\Read More</a>"
+        rep += f"\n<b>Description</b>:\n<i>{synopsis}</i><a href='{url}'>Read More</a>"
     else:
         rep += f"\n<b>Description</b>:\n_{synopsis}</i>"
     return rep
@@ -76,7 +76,7 @@ def anime(update: Update, context: CallbackContext):
         anime_id = anime.get("mal_id")
         duration = anime.get("duration")
         premiered = anime.get("premiered")
-        image_url = f"https://img.anili.st/media/{anime_id}"
+        image_url = anime.get("bannerImage")
         url = anime.get("url")
         synopsis = anime.get('synopsis', 'N/A').replace('<i>', '').replace(
             '</i>', '').replace('<br>', '')
