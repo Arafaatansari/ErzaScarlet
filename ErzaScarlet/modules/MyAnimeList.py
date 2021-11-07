@@ -80,8 +80,7 @@ def anime(update: Update, context: CallbackContext):
              [InlineKeyboardButton("More Information", url=url)]
          ]
     if image_url:
-            try:
-                update.effective_message.reply_photo(
+            update.effective_message.reply_photo(
                     photo=image_url,
                     caption=rep,
                     parse_mode=ParseMode.HTML,
