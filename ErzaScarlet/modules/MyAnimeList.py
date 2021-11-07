@@ -151,8 +151,17 @@ def character(update: Update, context: CallbackContext):
         keyb = [
             [InlineKeyboardButton("More Information", url=url)]
         ]
-        
-        msg.reply_text(rep, parse_mode=ParseMode.HTML, reply_markup=InlineKeyboardMarkup(keyb))
+    if image:
+            update.effective_message.reply_photo(
+                    photo=image,
+                    caption=rep,
+                    parse_mode=ParseMode.HTML,
+                    reply_markup=InlineKeyboardMarkup(keyb))
+    else:
+        update.effective_message.reply_text(
+            rep,
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(keyb))
         
         
 @run_async
@@ -215,8 +224,17 @@ def manga(update: Update, context: CallbackContext):
         keyb = [
             [InlineKeyboardButton("More Information", url=url)]
         ]
-        
-        msg.reply_text(rep, parse_mode=ParseMode.HTML, reply_markup=InlineKeyboardMarkup(keyb))
+        if image:
+            update.effective_message.reply_photo(
+                    photo=image,
+                    caption=rep,
+                    parse_mode=ParseMode.HTML,
+                    reply_markup=InlineKeyboardMarkup(keyb))
+    else:
+        update.effective_message.reply_text(
+            rep,
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(keyb))
         
         
 __help__ = """
