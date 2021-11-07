@@ -76,7 +76,7 @@ def anime(update: Update, context: CallbackContext):
         anime_id = anime.get("mal_id")
         duration = anime.get("duration")
         premiered = anime.get("premiered")
-        image_url = anime.get("image")
+        image_url = anime.get("image_url")
         url = anime.get("url")
         synopsis = anime.get('synopsis', 'N/A').replace('<i>', '').replace(
             '</i>', '').replace('<br>', '')
