@@ -147,7 +147,7 @@ def character(update: Update, context: CallbackContext):
         url = res.get("url")
         rep = f"<b>{name} ({kanji})</b>\n\n"
         rep += f"<a href='{image}'>\u200c</a>"
-        rep += f"<i>{about}</i>\n"
+        rep += shorten(about, url)
         keyb = [
             [InlineKeyboardButton("More Information", url=url)]
         ]
@@ -220,7 +220,7 @@ def manga(update: Update, context: CallbackContext):
         rep += f"<b>Volumes:</b> <code>{volumes}</code>\n"
         rep += f"<b>Chapters:</b> <code>{chapters}</code>\n\n"
         rep += f"<a href='{image}'>\u200c</a>"
-        rep += f"<i>{synopsis}</i>"
+        rep += shorten(synopsis, url)
         keyb = [
             [InlineKeyboardButton("More Information", url=url)]
         ]
