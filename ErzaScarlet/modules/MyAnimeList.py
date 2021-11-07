@@ -3,11 +3,37 @@
 from logging import info
 from jikanpy import Jikan
 from jikanpy.exceptions import APIException
+from anime import animestuffs
 
 from telegram import Message, Chat, User, ParseMode, Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 
 from ErzaScarlet import dispatcher
+
+def shorten(description, info='https://myanimelist.net/anime'):
+    rep = ""
+    if len(description) > 700:
+        description = description[0:500] + '....'
+        rep += f"\n*Description*:\n_{description}_[Read More]({info})"
+    else:
+        rep += f"\n*Description*:\n_{description}_"
+    return rep
+
+
+#time formatter from uniborg
+def t(milliseconds: int) -> str:
+    """Inputs time in milliseconds, to get beautified time,
+    as string"""
+    seconds, milliseconds = divmod(int(milliseconds), 1000)
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    days, hours = divmod(hours, 24)
+    tmp = ((str(days) + " Days, ") if days else "") + \
+        ((str(hours) + " Hours, ") if hours else "") + \
+        ((str(minutes) + " Minutes, ") if minutes else "") + \
+        ((str(seconds) + " Seconds, ") if seconds else "") + \
+        ((str(milliseconds) + " ms, ") if milliseconds else "")
+    return tmp[:-2]
 
 jikan = Jikan()
 
@@ -53,6 +79,8 @@ def anime(update: Update, context: CallbackContext):
         premiered = anime.get("premiered")
         image_url = f"https://img.anili.st/media/{anime_id}"
         url = anime.get("url")
+        description = json.get('synopsis', 'N/A').replace('<i>', '').replace(
+            '</i>', '').replace('<br>', '')
         trailer = anime.get("trailer_url")
     else:
         msg.reply_text("No results found!")
@@ -68,6 +96,8 @@ def anime(update: Update, context: CallbackContext):
     rep += f"<b>Studios:</b> <code>{studios}</code>\n"
     rep += f"<b>Premiered:</b> <code>{premiered}</code>\n"
     rep += f"<b>Rating:</b> <code>{rating}</code>\n\n"
+    rep += f"<b>description(s):</b> <code>{description}</code>\n"
+    rep += shorten(description, url)
     rep += f"<a href='{image_url}'>\u200c</a>"
     if trailer:
         keyb = [
