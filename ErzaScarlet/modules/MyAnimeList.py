@@ -1,5 +1,6 @@
 # Module to get info about anime, characters, manga etc. by @TheRealPhoenix
 
+from logging import info
 from jikanpy import Jikan
 from jikanpy.exceptions import APIException
 
@@ -7,6 +8,8 @@ from telegram import Message, Chat, User, ParseMode, Update, InlineKeyboardMarku
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 
 from ErzaScarlet import dispatcher
+
+jikan = Jikan()
 
 def shorten(synopsis, info='https://myanimelist.net/anime'):
     res = ""
@@ -16,8 +19,6 @@ def shorten(synopsis, info='https://myanimelist.net/anime'):
     else:
         res += f"\n*synopsis*:\n_{synopsis}_"
     return res
-
-jikan = Jikan()
 
 
 @run_async
@@ -48,6 +49,7 @@ def anime(update: Update, context: CallbackContext):
         status = anime.get("status")
         episodes = anime.get("episodes")
         score = anime.get("score")
+        info = anime.get('siteUrl')
         rating = anime.get("rating")
         genre_lst = anime.get("genres")
         genres = ""
