@@ -95,7 +95,7 @@ def anime(update: Update, context: CallbackContext):
     rep += f"<b>Score:</b> <code>{score}</code>\n"
     rep += f"<b>Studios:</b> <code>{studios}</code>\n"
     rep += f"<b>Premiered:</b> <code>{premiered}</code>\n"
-    rep += f"<b>Rating:</b> <code>{rating}</code>\n\n"
+    rep += f"<b>Rating:</b> <code>{rating}</code>\n"
     rep += shorten(synopsis, url)
     rep += f"<a href='{image_url}'>\u200c</a>"
     if trailer:
