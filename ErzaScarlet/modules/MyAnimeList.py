@@ -79,9 +79,24 @@ def anime(update: Update, context: CallbackContext):
         keyb = [
              [InlineKeyboardButton("More Information", url=url)]
          ]
-    
-    
-    msg.reply_text(rep, parse_mode=ParseMode.HTML, reply_markup=InlineKeyboardMarkup(keyb))
+    if image_url:
+            try:
+                update.effective_message.reply_photo(
+                    photo=image_url,
+                    caption=msg,
+                    parse_mode=ParseMode.HTML,
+                    reply_markup=InlineKeyboardMarkup(keyb))
+            except:
+                msg += f" [〽️]({image_url})"
+                update.effective_message.reply_text(
+                    msg,
+                    parse_mode=ParseMode.HTML,
+                    reply_markup=InlineKeyboardMarkup(keyb))
+        else:
+            update.effective_message.reply_text(
+                msg,
+                parse_mode=ParseMode.HTML,
+                reply_markup=InlineKeyboardMarkup(keyb))     
     
 
 @run_async
