@@ -8,6 +8,15 @@ from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 
 from ErzaScarlet import dispatcher
 
+def shorten(synopsis, info='https://myanimelist.net/anime'):
+    res = ""
+    if len(synopsis) > 700:
+        synopsis = synopsis[0:500] + '....'
+        res += f"\n*synopsis*:\n_{synopsis}_[Read More]({info})"
+    else:
+        res += f"\n*synopsis*:\n_{synopsis}_"
+    return res
+
 jikan = Jikan()
 
 
@@ -33,7 +42,8 @@ def anime(update: Update, context: CallbackContext):
         japanese = anime.get("title_japanese")
         type = anime.get("type")
         duration = anime.get("duration")
-        synopsis = anime.get("synopsis")
+        synopsis = anime.get("synopsis", 'N/A').replace('<i>', '').replace(
+            '</i>', '').replace('<br>', '')
         source = anime.get("source")
         status = anime.get("status")
         episodes = anime.get("episodes")
@@ -70,6 +80,7 @@ def anime(update: Update, context: CallbackContext):
     rep += f"<b>Rating:</b> <code>{rating}</code>\n\n"
     rep += f"<a href='{image_url}'>\u200c</a>"
     rep += f"<i>{synopsis}</i>\n"
+    res += shorten(synopsis, info)
     if trailer:
         keyb = [
             [InlineKeyboardButton("More Information", url=url),
