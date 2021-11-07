@@ -83,20 +83,21 @@ def anime(update: Update, context: CallbackContext):
             try:
                 update.effective_message.reply_photo(
                     photo=image_url,
-                    caption=msg,
+                    caption=res,
                     parse_mode=ParseMode.HTML,
                     reply_markup=InlineKeyboardMarkup(keyb))
             except:
                 msg += f" [〽️]({image_url})"
                 update.effective_message.reply_text(
-                    msg,
+                    res,
                     parse_mode=ParseMode.HTML,
                     reply_markup=InlineKeyboardMarkup(keyb))
     else:
-            update.effective_message.reply_text(
-                msg,
-                parse_mode=ParseMode.MARKDOWN,
-                reply_markup=InlineKeyboardMarkup(buttons))
+        update.effective_message.reply_text(
+            res,
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(keyb))
+
 
 @run_async
 def character(update: Update, context: CallbackContext):
