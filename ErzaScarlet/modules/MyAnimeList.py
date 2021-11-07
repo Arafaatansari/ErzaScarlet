@@ -11,7 +11,7 @@ from ErzaScarlet import dispatcher
 
 jikan = Jikan()
 
-def shorten(synopsis, info='https://myanimelist.net/anime'):
+def shorten(synopsis, info='https://myanimelist.net/anime/'):
     res = ""
     if len(synopsis) > 700:
         synopsis = synopsis[0:500] + '....'
@@ -49,7 +49,6 @@ def anime(update: Update, context: CallbackContext):
         status = anime.get("status")
         episodes = anime.get("episodes")
         score = anime.get("score")
-        info = anime.get('siteUrl')
         rating = anime.get("rating")
         genre_lst = anime.get("genres")
         genres = ""
@@ -77,12 +76,12 @@ def anime(update: Update, context: CallbackContext):
     rep += f"<b>Episodes:</b> <code>{episodes}</code>\n"
     rep += f"<b>Duration:</b> <code>{duration}</code>\n"
     rep += f"<b>Score:</b> <code>{score}</code>\n"
-    rep += f"<b>Studio(s):</b> <code>{studios}</code>\n"
+    rep += f"<b>Studios:</b> <code>{studios}</code>\n"
     rep += f"<b>Premiered:</b> <code>{premiered}</code>\n"
     rep += f"<b>Rating:</b> <code>{rating}</code>\n\n"
     rep += f"<a href='{image_url}'>\u200c</a>"
     rep += f"<i>{synopsis}</i>\n"
-    res += shorten(synopsis, info)
+    rep += shorten(synopsis, url)
     if trailer:
         keyb = [
             [InlineKeyboardButton("More Information", url=url),
