@@ -48,7 +48,7 @@ youtube-search-python
 instantmusic
 PyLyrics
 hachoir
-git+https://github.com/code-rgb/google-images-download.git
+git+https://github.com/hardikvasa/google-images-download.git
 pybase64
 pySmartDL
 validators
