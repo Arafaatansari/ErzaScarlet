@@ -1,0 +1,7 @@
+''' sample config.json
+{
+    "database": "process.env.STICKER_DB",
+    "botToken": "process.env.TOKEN",
+    "sudoList": "process.env.REQ_OWNER"
+}
+'''
