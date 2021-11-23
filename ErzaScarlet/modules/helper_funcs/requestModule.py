@@ -14,7 +14,7 @@ def idExtractor(channelID, document):
 def getAllGroupID(document):
     groupIDList = []
     for key in document:
-        if key == "groupID":
+        if key in ("groupID", "_id"):
             continue
         else:
             groupIDList.append(int(key))
