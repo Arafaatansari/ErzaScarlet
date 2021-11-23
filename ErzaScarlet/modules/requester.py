@@ -43,7 +43,7 @@ async def filter_requests(event):
         document = collection_ID.find_one(query)
         groupIDList = getAllGroupID(document)
         if IN_GRP in groupIDList:
-            REQ_GO = int(document[IN_GRP][0])
+            REQ_GO = int(document[str(IN_GRP)][0])
         #  await asst.send_message(IN_GRP,
             #                    f"**We are not taking any requests for some days.\n\nSorry for inconvenience 😶**",
             #                    buttons=[
