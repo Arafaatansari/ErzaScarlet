@@ -38,7 +38,7 @@ async def filter_requests(event):
     if event.fwd_from or event.post:
         return
     if "#request" in event.text:
-        IN_GRP = int(f"-100{event.peer_id.channel_id}")
+        IN_GRP = int(f"-100{event.message.peer_id.channel_id}")
 
         document = collection_ID.find_one(query)
         groupIDList = getAllGroupID(document)
