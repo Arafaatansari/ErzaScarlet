@@ -6,16 +6,18 @@ from ErzaScarlet import API_ID, API_HASH, TOKEN, OWNER , telethn as tbot
 from ErzaScarlet.events import register
 from ErzaScarlet.modules.helper_funcs.requestModule import *
 import logging
+import os
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-IN_GRP = -1001415010098
+# IN_GRP = -1001415010098
 bot = asst = tbot
-REQ_GO =  -1001509437008
+# REQ_GO =  -1001509437008
 on = tbot.on
 auth = OWNER 
 
-mongoDbSTR = "" # Connnection String of MongoDB
+mongoDbSTR = os.environ.get("MONGO_DB_URI")
+requestRegex = "#[rR][eE][qQ][uU][eE][sS][tT] (.*)"
 
 '''Connecting To Database'''
 mongo_client = MongoClient(mongoDbSTR)
@@ -30,70 +32,70 @@ query = {
 if not collection_ID.find_one(query):
     collection_ID.insert_one(query)
 
-### Extra comment(important)
-### To get list all of group IDs use following commands
-### document = collection_ID.find_one(query)
-### groupIDList = getAllGroupID(document)
-### groupIDList will now have a list of all integers(i.e., Group IDs)
-### Now implement however you want
 
-@tbot.on(events.NewMessage(chats=IN_GRP))
+@tbot.on(events.NewMessage(pattern = requestRegex))
 async def filter_requests(event):
-    if event.fwd_from:
+    if event.fwd_from or event.post:
         return
     if "#request" in event.text:
-      #  await asst.send_message(IN_GRP,
-        #                    f"**We are not taking any requests for some days.\n\nSorry for inconvenience 😶**",
-        #                    buttons=[
-        #                        [Button.url("💠 Channel 💠", url="https://t.me/AN1ME_HUB"),
-        #                        Button.url("⚜️ Group ⚜️", url="https://t.me/an1me_hub_discussion")],
-        #                        [Button.url("📜 Index 📜", url="https://t.me/index_animehub"),
-        #                        Button.url("🎬 Movies 🎬", url="https://t.me/AN1ME_HUB_MOVIES")],
-        #                        [Button.url("💌 AMV 💌", url="https://t.me/AnimeHub_Amv")]])
-        if (event.reply_to_msg_id):
-            msg = (await event.get_reply_message()).message
-        else:
-            msg = event.text
-        try:
-            global user
-            sender = event.sender
-            if sender.bot:
-                return
-            if not sender.username:
-                user = f"[{get_display_name(sender)}](tg://user?id={event.sender_id})"
+        IN_GRP = int(f"-100{event.peer_id.channel_id}")
+
+        document = collection_ID.find_one(query)
+        groupIDList = getAllGroupID(document)
+        if IN_GRP in groupIDList:
+            REQ_GO = int(document[IN_GRP][0])
+        #  await asst.send_message(IN_GRP,
+            #                    f"**We are not taking any requests for some days.\n\nSorry for inconvenience 😶**",
+            #                    buttons=[
+            #                        [Button.url("💠 Channel 💠", url="https://t.me/AN1ME_HUB"),
+            #                        Button.url("⚜️ Group ⚜️", url="https://t.me/an1me_hub_discussion")],
+            #                        [Button.url("📜 Index 📜", url="https://t.me/index_animehub"),
+            #                        Button.url("🎬 Movies 🎬", url="https://t.me/AN1ME_HUB_MOVIES")],
+            #                        [Button.url("💌 AMV 💌", url="https://t.me/AnimeHub_Amv")]])
+            if (event.reply_to_msg_id):
+                msg = (await event.get_reply_message()).message
             else:
-                user = "@" + str(sender.username)
-        except BaseException:
-            user = f"[User](tg://user?id={event.sender_id})"
-        chat_id = (str(event.chat_id)).replace("-100", "")
-        username = ((await bot.get_entity(REQ_GO)).username)
-        hel_ = "#request"
-        if hel_ in msg:
-            global anim
-            anim = msg.replace(hel_, "")
-        x = await asst.send_message(REQ_GO,
-                                f"**Request By {user}**\n\n{msg}",
-                                buttons=[
-                                    [Button.url("Requested Message", url=f"https://t.me/c/{chat_id}/{event.message.id}")],
-                                    [Button.inline("🚫 Reject", data="reqdelete"),
-                                    Button.inline("Done ✅", data="isdone")],
-                                    [Button.inline("⚠️ Unavailable ⚠️", data="unavl")]])
-        btns = [
-            [Button.url("⏳ Request Status ⏳", url=f"https://t.me/{username}/{x.id}")],
-            [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
-            Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
-            [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
-            Button.url("Base", url="https://t.me/indianimebase")],
-            [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
-        await event.reply(f"**👋 Hello {user} !!**\n\n📍 Your Request for  `{anim}`  has been submitted to the admins.\n\n🚀 Your Request Will Be Uploaded In 48hours or less.\n📌 Please Note that Admins might be busy. So, this may take more time. \n\n**👇 See Your Request Status Here 👇**", buttons=btns)
-        if not auth:
-            async for x in bot.iter_participants("@indianimein", filter=ChannelParticipantsAdmins):
-                auth.append(x.id)
+                msg = event.text
+            try:
+                global user
+                sender = event.sender
+                if sender.bot:
+                    return
+                if not sender.username:
+                    user = f"[{get_display_name(sender)}](tg://user?id={event.sender_id})"
+                else:
+                    user = "@" + str(sender.username)
+            except BaseException:
+                user = f"[User](tg://user?id={event.sender_id})"
+            chat_id = (str(event.chat_id)).replace("-100", "")
+            username = ((await bot.get_entity(REQ_GO)).username)
+            hel_ = "#request"
+            if hel_ in msg:
+                global anim
+                anim = msg.replace(hel_, "")
+            x = await asst.send_message(REQ_GO,
+                                    f"**Request By {user}**\n\n{msg}",
+                                    buttons=[
+                                        [Button.url("Requested Message", url=f"https://t.me/c/{chat_id}/{event.message.id}")],
+                                        [Button.inline("🚫 Reject", data="reqdelete"),
+                                        Button.inline("Done ✅", data="isdone")],
+                                        [Button.inline("⚠️ Unavailable ⚠️", data="unavl")]])
+            btns = [
+                [Button.url("⏳ Request Status ⏳", url=f"https://t.me/{username}/{x.id}")],
+                [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
+                Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
+                [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
+                Button.url("Base", url="https://t.me/indianimebase")],
+                [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
+            await event.reply(f"**👋 Hello {user} !!**\n\n📍 Your Request for  `{anim}`  has been submitted to the admins.\n\n🚀 Your Request Will Be Uploaded In 48hours or less.\n📌 Please Note that Admins might be busy. So, this may take more time. \n\n**👇 See Your Request Status Here 👇**", buttons=btns)
+            if not auth:
+                async for x in bot.iter_participants("@indianimein", filter=ChannelParticipantsAdmins):
+                    auth.append(x.id)
 
 # For Adding group & channel ID in database for #request feature
 @tbot.on(events.NewMessage(pattern = "/add"))
 async def addIDHandler(event):
-    msg = event.message.text.split(" ")
+    msg = event.text.split(" ")
     if len(msg) == 3:
         _, groupID, channelID = msg
         try:
@@ -141,7 +143,7 @@ async def addIDHandler(event):
 # For Removing group & channel ID from database
 @tbot.on(events.NewMessage(pattern = "/remove"))
 async def removeIDHandler(event):
-    msg = event.message.text.split(" ")
+    msg = event.text.split(" ")
     if len(msg) == 2:
         _, groupID = msg
         document = collection_ID.find_one(query)
@@ -166,6 +168,7 @@ async def removeIDHandler(event):
                         "<b>😒You are not the one who added this Channel ID & Group ID.</b>",
                         parse_mode = "html"
                     )
+                    break
         else:
             await event.respond(
                 "<b>Given Group ID is not found in our Database🤔.</b>",
