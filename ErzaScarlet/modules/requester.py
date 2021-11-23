@@ -1,8 +1,10 @@
 from telethon.tl.types import ChannelParticipantsAdmins
 from telethon.utils import get_display_name
 from telethon import *
+from pymongo import MongoClient
 from ErzaScarlet import API_ID, API_HASH, TOKEN, OWNER , telethn as tbot
 from ErzaScarlet.events import register
+from ErzaScarlet.modules.helper_funcs.requestModule import *
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -12,6 +14,21 @@ bot = asst = tbot
 REQ_GO =  -1001509437008
 on = tbot.on
 auth = OWNER 
+
+mongoDbSTR = "" # Connnection String of MongoDB
+
+'''Connecting To Database'''
+mongo_client = MongoClient(mongoDbSTR)
+db_bot = mongo_client['RequestTrackerBot']
+collection_ID = db_bot['channelGroupID']
+query = {
+    "groupID" : [
+        "channelID",
+        "userID"
+    ]
+}
+if not collection_ID.find_one(query):
+    collection_ID.insert_one(query)
 
 
 @tbot.on(events.NewMessage(chats=IN_GRP))
@@ -66,6 +83,54 @@ async def filter_requests(event):
         if not auth:
             async for x in bot.iter_participants("@indianimein", filter=ChannelParticipantsAdmins):
                 auth.append(x.id)
+
+# For Adding group & channel ID in database for #request feature
+@tbot.on(events.NewMessage(pattern = "/add"))
+async def addIDHandler(event):
+    msg = event.message.text.split(" ")
+    if len(msg) == 3:
+        _, groupID, channelID = msg
+        try:
+            int(groupID)
+            int(channelID)
+        except ValueError:
+            await event.respond(
+                "<b>Group ID & Channel ID should be integer type😒.</b>",
+                parse_mode = "html"
+            )
+        else:
+            document = collection_ID.find_one(query)
+            try:
+                document[groupID]
+            except KeyError:
+                if not idExtractor(channelID, document):
+                    document[groupID] = [channelID, event.sender_id]
+                    collection_ID.update_one(
+                        query,
+                        {
+                            "$set" : document
+                        }
+                    )
+                    await event.respond(
+                        "<b>Your Group and Channel has now been added SuccessFully🥳.</b>",
+                        parse_mode = "html"
+                    )
+                else:
+                    await event.respond(
+                        "<b>Your Channel ID already Added🤪.</b>",
+                        parse_mode = "html"
+                    )
+            else:
+                await event.respond(
+                    "<b>Your Group ID already Added🤪.</b>",
+                    parse_mode = "html"
+                )
+    else:
+        await event.respond(
+            "<b>Invalid Format😒\
+            \nSend Group ID & Channel ID in this format <code>/add GroupID ChannelID</code>.</b>",
+            parse_mode = "html"
+        )
 
 @tbot.on(events.callbackquery.CallbackQuery(data="reqdelete"))
 async def delete_message(event):
