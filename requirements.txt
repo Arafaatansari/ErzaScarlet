@@ -57,3 +57,5 @@ urllib3
 heroku3
 search_engine_parser
 bing_image_downloader
+pymongo
+dnspython
