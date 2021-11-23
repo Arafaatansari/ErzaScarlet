@@ -132,6 +132,46 @@ async def addIDHandler(event):
             parse_mode = "html"
         )
 
+# For Removing group & channel ID from database
+@tbot.on(events.NewMessage(pattern = "/remove"))
+async def removeIDHandler(event):
+    msg = event.message.text.split(" ")
+    if len(msg) == 2:
+        _, groupID = msg
+        document = collection_ID.find_one(query)
+        for key in document:
+            if key == groupID:
+                if document[key][1] == event.sender_id:
+                    del document[key]
+                    collection_ID.update_one(
+                        query,
+                        {
+                            "$set" : document
+                            }
+                    )
+                    await event.respond(
+                        "<b>Your Channel ID & Group ID has now been Deleted😢 from our Database.\
+                        \nYou can add them again by using <code>/add GroupID ChannelID</code>.</b>",
+                        parse_mode = "html"
+                    )
+                    break
+                else:
+                    await event.respond(
+                        "<b>😒You are not the one who added this Channel ID & Group ID.</b>",
+                        parse_mode = "html"
+                    )
+        else:
+            await event.respond(
+                "<b>Given Group ID is not found in our Database🤔.</b>",
+                parse_mode = "html"
+            )
+    else:
+        await event.respond(
+            "<b>Invalid Command😒\
+            \nUse <code>/remove GroupID</code></b>.",
+            parse_mode = "html"
+        )
+
 @tbot.on(events.callbackquery.CallbackQuery(data="reqdelete"))
 async def delete_message(event):
     if not auth:
