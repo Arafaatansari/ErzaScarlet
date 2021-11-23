@@ -30,6 +30,12 @@ query = {
 if not collection_ID.find_one(query):
     collection_ID.insert_one(query)
 
+### Extra comment(important)
+### To get list all of group IDs use following commands
+### document = collection_ID.find_one(query)
+### groupIDList = getAllGroupID(document)
+### groupIDList will now have a list of all integers(i.e., Group IDs)
+### Now implement however you want
 
 @tbot.on(events.NewMessage(chats=IN_GRP))
 async def filter_requests(event):

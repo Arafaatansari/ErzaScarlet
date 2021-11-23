@@ -10,3 +10,14 @@ def idExtractor(channelID, document):
         except TypeError:
             continue
     return
+
+def getAllGroupID(document):
+    groupIDList = []
+    for key in document:
+        if key == "groupID":
+            continue
+        else:
+            groupIDList.append(int(key))
+    else:
+        return groupIDList
+
