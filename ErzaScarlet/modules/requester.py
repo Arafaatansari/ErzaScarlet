@@ -81,12 +81,7 @@ async def filter_requests(event):
                                         Button.inline("Done ✅", data="isdone")],
                                         [Button.inline("⚠️ Unavailable ⚠️", data="unavl")]])
             btns = [
-                [Button.url("⏳ Request Status ⏳", url=f"https://t.me/{username}/{x.id}")],
-                [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
-                Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
-                [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
-                Button.url("Base", url="https://t.me/indianimebase")],
-                [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
+                [Button.url("⏳ Request Status ⏳", url=f"https://t.me/{username}/{x.id}")]]
             await event.reply(f"**👋 Hello {user} !!**\n\n📍 Your Request for  `{anim}`  has been submitted to the admins.\n\n🚀 Your Request Will Be Uploaded In 48hours or less.\n📌 Please Note that Admins might be busy. So, this may take more time. \n\n**👇 See Your Request Status Here 👇**", buttons=btns)
             if not auth:
                 async for x in bot.iter_participants("@indianimein", filter=ChannelParticipantsAdmins):
