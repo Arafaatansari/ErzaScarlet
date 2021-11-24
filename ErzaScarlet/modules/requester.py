@@ -1,4 +1,10 @@
 from telethon.tl.types import ChannelParticipantsAdmins
+from telethon.tl.functions.channels import GetParticipantRequest
+from telethon.errors.rpcerrorlist import (
+    ChannelPrivateError,
+    PeerIdInvalidError,
+    UserNotParticipantError
+)
 from telethon.utils import get_display_name
 from telethon import *
 from pymongo import MongoClient
@@ -107,38 +113,97 @@ async def addIDHandler(event):
                 parse_mode = "html"
             )
         else:
-            document = collection_ID.find_one(query)
-            try:
-                document[groupID]
-            except KeyError:
-                if not idExtractor(channelID, document):
-                    document[groupID] = [channelID, event.sender_id]
-                    collection_ID.update_one(
-                        query,
-                        {
-                            "$set" : document
-                        }
-                    )
+            documents = collection_ID.find()
+            for document in documents:
+                try:
+                    document[groupID]
+                except KeyError:
+                    pass
+                else:
                     await event.respond(
-                        "<b>Your Group and Channel has now been added SuccessFully🥳.</b>",
+                    "<b>Your Group ID already Added🤪.</b>",
+                    parse_mode = "html"
+                    )
+                    break
+                for record in document:
+                    if record == "_id":
+                        continue
+                    else:
+                        if document[record][0] == channelID:
+                            return await event.respond(
+                                "<b>Your Channel ID already Added🤪.</b>",
+                                parse_mode = "html"
+                            )
+            else:
+                try:
+                    botSelfGroup = await tbot(GetParticipantRequest(int(groupID), 'me'))
+                except TypeError:
+                    try:
+                        async for botSelfGroup in tbot.iter_participants(int(groupID), filter = ChannelParticipantsAdmins):
+                            if not botSelfGroup.is_self:
+                                return await event.respond(
+                                    "<b>😁Add me in group and make me admin, then use /add.</b>",
+                                    parse_mode = "html"
+                                )
+                    except (ValueError, PeerIdInvalidError):
+                        return await event.respond(
+                            "<b>😒Group ID is wrong.</b>",
+                            parse_mode = "html"
+                        )
+                except (ValueError, PeerIdInvalidError):
+                    return await event.respond(
+                        "<b>😒Group ID is wrong.</b>",
+                        parse_mode = "html"
+                    )
+                except ChannelPrivateError:
+                    return await event.respond(
+                        "<b>😁Add me in group and make me admin, then use /add.</b>",
                         parse_mode = "html"
                     )
                 else:
+                    partcpt = botSelfGroup.participant
+                    try:
+                        partcpt.promoted_by
+                    except AttributeError:
+                        return await event.respond(
+                            "<b>🥲Make me admin in Group, Then add use /add.</b>",
+                            parse_mode = "html"
+                        )
+                try:
+                    botSelfChannel = await tbot(GetParticipantRequest(int(channelID), 'me'))
+                except (ValueError, TypeError):
                     await event.respond(
-                        "<b>Your Channel ID already Added🤪.</b>",
+                        "<b>😒Channel ID is wrong.</b>",
                         parse_mode = "html"
                     )
-            else:
-                await event.respond(
-                    "<b>Your Group ID already Added🤪.</b>",
-                    parse_mode = "html"
-                )
+                except (ChannelPrivateError, UserNotParticipantError):
+                    await event.respond(
+                        "<b>😁Add me in Channel and make me admin, then use /add.</b>",
+                        parse_mode = "html"
+                    )
+                else:
+                    rights = botSelfChannel.participant.admin_rights
+                    if not (rights.post_messages and rights.edit_messages and rights.delete_messages):
+                        await event.respond(
+                            "<b>🥲Make sure to give Permissions like Post Messages, Edit Messages & Delete Messages.</b>",
+                            parse_mode = "html"
+                        )
+                    else:
+                        collection_ID.insert_one(
+                            {
+                                groupID : [channelID, event.sender_id]
+                            }
+                        )
+                        await event.respond(
+                            "<b>Your Group and Channel has now been added SuccessFully🥳.\n\n😊Join @AJPyroVerse & @AJPyroVerseGroup for getting more awesome 🤖bots like this.</b>",
+                            parse_mode = "html"
+                        )
     else:
         await event.respond(
-            "<b>Invalid Format😒\
-            \nSend Group ID & Channel ID in this format <code>/add GroupID ChannelID</code>.</b>",
+            "<b>Invalid Format😒\nSend Group ID & Channel ID in this format <code>/add GroupID ChannelID</code>.</b>",
             parse_mode = "html"
         )
+    return
 
 # For Removing group & channel ID from database
 @tbot.on(events.NewMessage(pattern = "/remove"))
