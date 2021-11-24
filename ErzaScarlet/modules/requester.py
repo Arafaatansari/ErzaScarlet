@@ -195,7 +195,7 @@ async def addIDHandler(event):
                             }
                         )
                         await event.respond(
-                            "<b>Your Group and Channel has now been added SuccessFully🥳.\n\n😊Join @AJPyroVerse & @AJPyroVerseGroup for getting more awesome 🤖bots like this.</b>",
+                            "<b>Your Group and Channel has now been added SuccessFully🥳.</b>",
                             parse_mode = "html"
                         )
     else:
@@ -211,40 +211,44 @@ async def removeIDHandler(event):
     msg = event.text.split(" ")
     if len(msg) == 2:
         _, groupID = msg
-        document = collection_ID.find_one(query)
-        for key in document:
-            if key == groupID:
-                if document[key][1] == event.sender_id:
-                    del document[key]
-                    collection_ID.update_one(
-                        query,
-                        {
-                            "$set" : document
-                            }
-                    )
-                    await event.respond(
-                        "<b>Your Channel ID & Group ID has now been Deleted😢 from our Database.\
-                        \nYou can add them again by using <code>/add GroupID ChannelID</code>.</b>",
-                        parse_mode = "html"
-                    )
-                    break
-                else:
-                    await event.respond(
-                        "<b>😒You are not the one who added this Channel ID & Group ID.</b>",
-                        parse_mode = "html"
-                    )
-                    break
-        else:
+        try:
+            int(groupID)
+        except ValueError:
             await event.respond(
-                "<b>Given Group ID is not found in our Database🤔.</b>",
+                "<b>Group ID should be integer type😒.</b>",
                 parse_mode = "html"
             )
+        else:
+            documents = collection_ID.find()
+            for document in documents:
+                try:
+                    document[groupID]
+                except KeyError:
+                    continue
+                else:
+                    if document[groupID][1] == event.sender_id:
+                        collection_ID.delete_one(document)
+                        await event.respond(
+                            "<b>Your Channel ID & Group ID has now been Deleted😢 from our Database.\nYou can add them again by using <code>/add GroupID ChannelID</code>.</b>",
+                            parse_mode = "html"
+                        )
+                    else:
+                        await event.respond(
+                            "<b>😒You are not the one who added this Channel ID & Group ID.</b>",
+                            parse_mode = "html"
+                        )
+                    break
+            else:
+                await event.respond(
+                    "<b>Given Group ID is not found in our Database🤔.</b>",
+                    parse_mode = "html"
+                )
     else:
         await event.respond(
-            "<b>Invalid Command😒\
-            \nUse <code>/remove GroupID</code></b>.",
+            "<b>Invalid Command😒\nUse <code>/remove GroupID</code></b>.",
             parse_mode = "html"
         )
+    return
 
 @tbot.on(events.callbackquery.CallbackQuery(data="reqdelete"))
 async def delete_message(event):
