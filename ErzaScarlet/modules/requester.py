@@ -20,7 +20,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 bot = asst = tbot
 # REQ_GO =  -1001509437008
 on = tbot.on
-auth = OWNER 
+auth = OWNER # No more need
 
 mongoDbSTR = os.environ.get("MONGO_DB_URI")
 requestRegex = "#[rR][eE][qQ][uU][eE][sS][tT] (.*)"
@@ -29,14 +29,6 @@ requestRegex = "#[rR][eE][qQ][uU][eE][sS][tT] (.*)"
 mongo_client = MongoClient(mongoDbSTR)
 db_bot = mongo_client['RequestTrackerBot']
 collection_ID = db_bot['channelGroupID']
-query = {
-    "groupID" : [
-        "channelID",
-        "userID"
-    ]
-}
-if not collection_ID.find_one(query):
-    collection_ID.insert_one(query)
 
 
 @tbot.on(events.NewMessage(pattern = requestRegex))
@@ -44,12 +36,18 @@ async def filter_requests(event):
     if event.fwd_from or event.post:
         return
     if "#request" in event.text:
-        IN_GRP = int(f"-100{event.message.peer_id.channel_id}")
+        IN_GRP = f"-100{event.peer_id.channel_id}"
 
-        document = collection_ID.find_one(query)
-        groupIDList = getAllGroupID(document)
-        if IN_GRP in groupIDList:
-            REQ_GO = int(document[str(IN_GRP)][0])
+        documents = collection_ID.find()
+        for document in documents:
+            try:
+                document[IN_GRP]
+            except KeyError:
+                continue
+            else:
+                REQ_GO = int(document[IN_GRP][0])
+                IN_GRP = int(IN_GRP)
+
         #  await asst.send_message(IN_GRP,
             #                    f"**We are not taking any requests for some days.\n\nSorry for inconvenience 😶**",
             #                    buttons=[
@@ -58,45 +56,45 @@ async def filter_requests(event):
             #                        [Button.url("📜 Index 📜", url="https://t.me/index_animehub"),
             #                        Button.url("🎬 Movies 🎬", url="https://t.me/AN1ME_HUB_MOVIES")],
             #                        [Button.url("💌 AMV 💌", url="https://t.me/AnimeHub_Amv")]])
-            if (event.reply_to_msg_id):
-                msg = (await event.get_reply_message()).message
-            else:
-                msg = event.text
-            try:
-                global user
-                sender = event.sender
-                if sender.bot:
-                    return
-                if not sender.username:
-                    user = f"[{get_display_name(sender)}](tg://user?id={event.sender_id})"
+                if (event.reply_to_msg_id):
+                    msg = (await event.get_reply_message()).message
                 else:
-                    user = "@" + str(sender.username)
-            except BaseException:
-                user = f"[User](tg://user?id={event.sender_id})"
-            chat_id = (str(event.chat_id)).replace("-100", "")
-            username = ((await bot.get_entity(REQ_GO)).username)
-            hel_ = "#request"
-            if hel_ in msg:
-                global anim
-                anim = msg.replace(hel_, "")
-            x = await asst.send_message(REQ_GO,
-                                    f"**Request By {user}**\n\n{msg}",
-                                    buttons=[
-                                        [Button.url("Requested Message", url=f"https://t.me/c/{chat_id}/{event.message.id}")],
-                                        [Button.inline("🚫 Reject", data="reqdelete"),
-                                        Button.inline("Done ✅", data="isdone")],
-                                        [Button.inline("⚠️ Unavailable ⚠️", data="unavl")]])
-            btns = [
-                [Button.url("⏳ Request Status ⏳", url=f"https://t.me/{username}/{x.id}")],
-                [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
-                Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
-                [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
-                Button.url("Base", url="https://t.me/indianimebase")],
-                [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
-            await event.reply(f"**👋 Hello {user} !!**\n\n📍 Your Request for  `{anim}`  has been submitted to the admins.\n\n🚀 Your Request Will Be Uploaded In 48hours or less.\n📌 Please Note that Admins might be busy. So, this may take more time. \n\n**👇 See Your Request Status Here 👇**", buttons=btns)
-            if not auth:
-                async for x in bot.iter_participants("@indianimein", filter=ChannelParticipantsAdmins):
-                    auth.append(x.id)
+                    msg = event.text
+                try:
+                    global user
+                    sender = event.sender
+                    if sender.bot:
+                        return
+                    if not sender.username:
+                        user = f"[{get_display_name(sender)}](tg://user?id={event.sender_id})"
+                    else:
+                        user = "@" + str(sender.username)
+                except BaseException:
+                    user = f"[User](tg://user?id={event.sender_id})"
+                chat_id = (str(event.chat_id)).replace("-100", "")
+                username = ((await bot.get_entity(REQ_GO)).username)
+                hel_ = "#request"
+                if hel_ in msg:
+                    global anim
+                    anim = msg.replace(hel_, "")
+                x = await asst.send_message(REQ_GO,
+                                        f"**Request By {user}**\n\n{msg}",
+                                        buttons=[
+                                            [Button.url("Requested Message", url=f"https://t.me/c/{chat_id}/{event.message.id}")],
+                                            [Button.inline("🚫 Reject", data="reqdelete"),
+                                            Button.inline("Done ✅", data="isdone")],
+                                            [Button.inline("⚠️ Unavailable ⚠️", data="unavl")]])
+                btns = [
+                    [Button.url("⏳ Request Status ⏳", url=f"https://t.me/{username}/{x.id}")],
+                    [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
+                    Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
+                    [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
+                    Button.url("Base", url="https://t.me/indianimebase")],
+                    [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
+                await event.reply(f"**👋 Hello {user} !!**\n\n📍 Your Request for  `{anim}`  has been submitted to the admins.\n\n🚀 Your Request Will Be Uploaded In 48hours or less.\n📌 Please Note that Admins might be busy. So, this may take more time. \n\n**👇 See Your Request Status Here 👇**", buttons=btns)
+                if not auth:
+                    async for x in bot.iter_participants("@indianimein", filter=ChannelParticipantsAdmins):
+                        auth.append(x.id)
 
 # For Adding group & channel ID in database for #request feature
 @tbot.on(events.NewMessage(pattern = "/add"))
@@ -251,65 +249,101 @@ async def removeIDHandler(event):
     return
 
 @tbot.on(events.callbackquery.CallbackQuery(data="reqdelete"))
-async def delete_message(event):
-    if not auth:
-        async for x in bot.iter_participants("@indianimein", filter=ChannelParticipantsAdmins):
-             auth.append(x.id)
-    if event.sender_id in auth:
-        x = await bot.get_messages(event.chat_id, ids=event.message_id)
-        xx = x.raw_text
-        btns = [
-            [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
-            Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
-            [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
-            Button.url("Base", url="https://t.me/indianimebase")],
-            [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
-       
-        await event.edit(f"**REJECTED**\n\n~~{xx}~~", buttons=[Button.inline("Request Rejected 🚫", data="ndone")])
-        await tbot.send_message(-1001415010098, f"**⚠️ Request Rejected By Admin !!**\n\n~~{xx}~~", buttons=btns)
-    else:
-        await event.answer("Who TF are you? This is for admins only..", alert=True, cache_time=0)
+async def delete_message(e):
+    channelID = f"-100{e.original_update.peer.channel_id}"
+
+    documents = collection_ID.find()
+    for document in documents:
+        for key in document:
+            if key == "_id":
+                continue
+            else:
+                if document[key][0] != channelID:
+                    continue
+                else:
+                    groupID = key
+                    async for x in tbot.iter_participants(int(channelID), filter=ChannelParticipantsAdmins):
+                        if x.id == e.sender_id:
+                            tx = await tbot.get_messages(e.chat_id, ids=e.message_id)
+                            xx = tx.raw_text
+                            btns = [
+                                [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
+                                Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
+                                [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
+                                Button.url("Base", url="https://t.me/indianimebase")],
+                                [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
+                        
+                            await e.edit(f"**REJECTED**\n\n~~{xx}~~", buttons=[Button.inline("Request Rejected 🚫", data="ndone")])
+                            await tbot.send_message(int(groupID), f"**⚠️ Request Rejected By Admin !!**\n\n~~{xx}~~", buttons=btns)
+                            break
+                    else:
+                        await e.answer("Who TF are you? This is for admins only..", alert=True, cache_time=0)
+    return
         
 @tbot.on(events.callbackquery.CallbackQuery(data="unavl"))
-async def delete_message(event):
-    if not auth:
-        async for x in bot.iter_participants("@indianimein", filter=ChannelParticipantsAdmins):
-             auth.append(x.id)
-    if event.sender_id in auth:
-        x = await bot.get_messages(event.chat_id, ids=event.message_id)
-        xx = x.raw_text
-        btns = [
-            [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
-            Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
-            [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
-            Button.url("Base", url="https://t.me/indianimebase")],
-            [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
-       
-        await event.edit(f"**UNAVAILABLE**\n\n~~{xx}~~", buttons=[Button.inline("❗ Unavailable ❗", data="navl")])
-        await tbot.send_message(-1001415010098, f"**⚠️ Request Unavailable ⚠️**\n\n~~{xx}~~", buttons=btns)
-    else:
-        await event.answer("Who TF are you? This is for admins only..", alert=True, cache_time=0)
-        
+async def delete_message(e):
+    channelID = f"-100{e.original_update.peer.channel_id}"
+
+    documents = collection_ID.find()
+    for document in documents:
+        for key in document:
+            if key == "_id":
+                continue
+            else:
+                if document[key][0] != channelID:
+                    continue
+                else:
+                    groupID = key
+                    async for x in tbot.iter_participants(int(channelID), filter=ChannelParticipantsAdmins):
+                        if x.id == e.sender_id:
+                            tx = await tbot.get_messages(e.chat_id, ids=e.message_id)
+                            xx = tx.raw_text
+                            btns = [
+                                [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
+                                Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
+                                [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
+                                Button.url("Base", url="https://t.me/indianimebase")],
+                                [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
+                        
+                            await e.edit(f"**UNAVAILABLE**\n\n~~{xx}~~", buttons=[Button.inline("❗ Unavailable ❗", data="navl")])
+                            await tbot.send_message(int(groupID), f"**⚠️ Request Unavailable ⚠️**\n\n~~{xx}~~", buttons=btns)
+                            break
+                    else:
+                        await e.answer("Who TF are you? This is for admins only..", alert=True, cache_time=0)
+    return
         
 @tbot.on(events.callbackquery.CallbackQuery(data="isdone"))
 async def isdone(e):
-    if not auth:
-        async for x in bot.iter_participants("@indianimein", filter=ChannelParticipantsAdmins):
-             auth.append(x.id)
-    if e.sender_id in auth:
-        x = await bot.get_messages(e.chat_id, ids=e.message_id)
-        xx = x.raw_text
-        btns = [
-            [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
-            Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
-            [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
-            Button.url("Base", url="https://t.me/indianimebase")],
-            [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
-       
-        await e.edit(f"**COMPLETED**\n\n~~{xx}~~", buttons=[Button.inline("Request Completed ✅", data="donne")])
-        await tbot.send_message(-1001415010098, f"**Request Completed**\n\n~~{xx}~~", buttons=btns)
-    else:
-        await e.answer("Who TF are you? This is for admins only..", alert=True, cache_time=0)
+    channelID = f"-100{e.original_update.peer.channel_id}"
+
+    documents = collection_ID.find()
+    for document in documents:
+        for key in document:
+            if key == "_id":
+                continue
+            else:
+                if document[key][0] != channelID:
+                    continue
+                else:
+                    groupID = key
+
+                    async for x in tbot.iter_participants(int(channelID), filter=ChannelParticipantsAdmins):
+                        if x.id == e.sender_id:
+                            tx = await tbot.get_messages(e.chat_id, ids=e.message_id)
+                            xx = tx.raw_text
+                            btns = [
+                                [Button.url("💠 Channel 💠", url="https://t.me/indianimei"),
+                                Button.url("⚜️ Group ⚜️", url="https://t.me/indianimein")],
+                                [Button.url("📜 Index 📜", url="https://t.me/IndianimeNetwork"),
+                                Button.url("Base", url="https://t.me/indianimebase")],
+                                [Button.url("Ongoing Anime", url="https://t.me/Ongoing_Anime1")]]
+                        
+                            await e.edit(f"**COMPLETED**\n\n~~{xx}~~", buttons=[Button.inline("Request Completed ✅", data="donne")])
+                            await tbot.send_message(int(groupID), f"**Request Completed**\n\n~~{xx}~~", buttons=btns)
+                            break
+                    else:
+                        await e.answer("Who TF are you? This is for admins only..", alert=True, cache_time=0) 
+    return
         
     
 @tbot.on(events.callbackquery.CallbackQuery(data="donne"))
