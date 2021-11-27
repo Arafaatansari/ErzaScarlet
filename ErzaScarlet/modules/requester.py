@@ -35,7 +35,7 @@ collection_ID = db_bot['channelGroupID']
 async def filter_requests(event):
     if event.fwd_from or event.post:
         return
-    if "#request" in event.text:
+    else:
         IN_GRP = f"-100{event.peer_id.channel_id}"
 
         documents = collection_ID.find()
