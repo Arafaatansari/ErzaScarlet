@@ -26,7 +26,6 @@ from ErzaScarlet.modules.helper_funcs.admin_rights import user_can_ban
 from ErzaScarlet.modules.helper_funcs.alternate import typing_action
 from ErzaScarlet.modules.log_channel import loggable
 
-
 @run_async
 @bot_admin
 @user_admin
@@ -64,6 +63,10 @@ def mute(update, context):
     if member:
         if is_user_admin(chat, user_id, member=member):
             message.reply_text("Well I'm not gonna stop an admin from talking!")
+            
+        if user_id in [777000, 1087968824]:
+            reply = "Fool! You can't attack Telegram's native tech!"
+            return reply
         
         elif member.can_send_messages is None or member.can_send_messages:
             context.bot.restrict_chat_member(
@@ -95,6 +98,7 @@ def mute(update, context):
                 )
             )
 
+       
         else:
             message.reply_text("This user is already muted.")
     else:

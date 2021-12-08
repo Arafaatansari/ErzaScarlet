@@ -74,6 +74,9 @@ def ban(update: Update, context: CallbackContext) -> str:
         elif user_id in WOLVES:
             message.reply_text("Wolf abilities make them ban immune!")
             return log_message
+        elif user_id in [777000, 1087968824]:
+            message.reply_text("Fool! You can't attack Telegram's native tech!")
+            return log_message
         else:
             message.reply_text("This user has immunity and cannot be banned.")
             return log_message
