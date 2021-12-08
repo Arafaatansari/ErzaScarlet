@@ -65,8 +65,9 @@ def mute(update, context):
             message.reply_text("Well I'm not gonna stop an admin from talking!")
             
         if user_id in [777000, 1087968824]:
-            reply = "Fool! You can't attack Telegram's native tech!"
-            return reply
+            reply = "Hey you human listen, I do not support Anonymous Admins and Channels"
+            message.reply_text(reply)
+            return ""  
         
         elif member.can_send_messages is None or member.can_send_messages:
             context.bot.restrict_chat_member(
