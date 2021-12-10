@@ -33,7 +33,7 @@ def is_sudo_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
 def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if (chat.type == 'private' or user_id in DRAGONS or user_id in DEV_USERS or
             chat.all_members_are_administrators or
-            user_id in [1087968824
+            user_id in [953362604
                        ]):  # Count telegram and Group Anonymous as admin
         return True
 
@@ -77,7 +77,7 @@ def is_user_ban_protected(chat: Chat,
     if (chat.type == 'private' or user_id in DRAGONS or user_id in DEV_USERS or
             user_id in WOLVES or user_id in TIGERS or
             chat.all_members_are_administrators or
-            user_id in [1087968824
+            user_id in [953362604
                        ]):  # Count telegram and Group Anonymous as admin
         return True
 
@@ -197,6 +197,8 @@ def user_admin(func):
                 update.effective_message.delete()
             except:
                 pass
+        if user.id in [777000, 1087968824]:
+            update.effective_message.reply_text("Go away kid, you can't do that here")    
         else:
             update.effective_message.reply_text(
                 "Who dis non-admin telling me what to do? You want a kick?")
@@ -250,9 +252,13 @@ def bot_admin(func):
         chat = update.effective_chat
         update_chat_title = chat.title
         message_chat_title = update.effective_message.chat.title
+        user = update.effective_user
 
         if update_chat_title == message_chat_title:
             not_admin = "I'm not admin! - REEEEEE"
+            
+        if user.id in [777000, 1087968824]:
+            update.effective_message.reply_text("Go away kid, you can't do that here")      
         else:
             not_admin = f"I'm not admin in <b>{update_chat_title}</b>! - REEEEEE"
 
@@ -274,9 +280,14 @@ def bot_can_delete(func):
         chat = update.effective_chat
         update_chat_title = chat.title
         message_chat_title = update.effective_message.chat.title
+        user = update.effective_user
 
         if update_chat_title == message_chat_title:
             cant_delete = "I can't delete messages here!\nMake sure I'm admin and can delete other user's messages."
+            return ""
+        if user.id in [777000, 1087968824]:
+            update.effective_message.reply_text("Go away kid, you can't do that here")  
+            return ""    
         else:
             cant_delete = f"I can't delete messages in <b>{update_chat_title}</b>!\nMake sure I'm admin and can delete other user's messages there."
 
@@ -297,9 +308,12 @@ def can_pin(func):
         chat = update.effective_chat
         update_chat_title = chat.title
         message_chat_title = update.effective_message.chat.title
+        user = update.effective_user
 
         if update_chat_title == message_chat_title:
             cant_pin = "I can't pin messages here!\nMake sure I'm admin and can pin messages."
+        if user.id in [777000, 1087968824]:
+            update.effective_message.reply_text("Go away kid, you can't do that here")    
         else:
             cant_pin = f"I can't pin messages in <b>{update_chat_title}</b>!\nMake sure I'm admin and can pin messages there."
 
@@ -370,8 +384,9 @@ def user_can_ban(func):
         bot = context.bot
         user = update.effective_user.id
         member = update.effective_chat.get_member(user)
+            
         if not (member.can_restrict_members or member.status == "creator"
-               ) and not user in DRAGONS and user not in [1087968824]:
+               ) and not user in DRAGONS:
             update.effective_message.reply_text(
                 "Sorry son, but you're not worthy to wield the banhammer.")
             return ""
