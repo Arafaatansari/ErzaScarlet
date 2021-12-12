@@ -8,7 +8,7 @@ from telethon.errors.rpcerrorlist import (
 from telethon.utils import get_display_name
 from telethon import *
 from pymongo import MongoClient
-from ErzaScarlet import API_ID, API_HASH, TOKEN, OWNER , telethn as tbot
+from ErzaScarlet import API_ID, API_HASH, TOKEN, DEV_USERS as OWNER , telethn as tbot
 from ErzaScarlet.events import register
 from ErzaScarlet.modules.helper_funcs.requestModule import *
 import logging
