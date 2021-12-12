@@ -63,9 +63,9 @@ from ErzaScarlet.modules.helper_funcs.readable_time import get_readable_time
 PM_START_TEXT = """
 *Hi There! {}, myself {}!* 
 
-I'm an Highly Advanced Bot With 100's Awesome Features.
+I am a highly advanced bot with 100's of amazing features.
 
-To Use My All Features Add Me In Your Group & Don't Forget To Promote Me As Admin.
+Add me to your group to use all my features and don't forget to promote me as an admin.
 
 Here is my quick status :)
 • *Uptime:* `{}`
