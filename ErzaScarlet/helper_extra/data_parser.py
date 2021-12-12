@@ -848,6 +848,10 @@ async def get_anime(vars_, auth: bool = False, user: int = None):
         status_air = f"‣ **STATUS:** `{status}`\n‣ **NEXT AIRING:** `{air_on}`"
     if data["trailer"] and data["trailer"]["site"] == "youtube":
         trailer_link = f"<a href='https://youtu.be/{data['trailer']['id']}'>Trailer</a>"
+        btn = []
+        btn.append([
+            InlineKeyboardButton("trailer", url="https://google.com"),
+        ])
     title_img = f"https://img.anili.st/media/{idm}"
     try:
         finals_ = ANIME_TEMPLATE.format(**locals())

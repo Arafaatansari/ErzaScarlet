@@ -12,7 +12,6 @@ from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import InlineKeyboardButton, CallbackQuery, Message, InlineKeyboardMarkup
 from ErzaScarlet import DEV_USERS as OWNER, DOWN_PATH, pbot as anibot, EVENT_LOGS as LOG_CHANNEL_ID, has_user
 from ErzaScarlet.helper_extra.db import get_collection
-from ErzaScarlet.helper_extra.data_parser import get_anime
 
 if has_user:
     from ErzaScarlet import user
@@ -268,7 +267,6 @@ def get_btns(media, user: int, result: list, lsqry: str = None, lspage: int = No
             InlineKeyboardButton(text="Characters", callback_data=f"char_{result[2][0]}_ANI{qry}{pg}_{str(auth)}_1_{user}"),
             InlineKeyboardButton(text="Description", callback_data=f"desc_{result[2][0]}_ANI{qry}{pg}_{str(auth)}_{user}"),
             InlineKeyboardButton(text="List Series", callback_data=f"ls_{result[2][0]}_ANI{qry}{pg}_{str(auth)}_{user}"),
-            InlineKeyboardButton(text="Trailler button", url=f"{get_anime(trailer_link)}"),
         ])
     if media == "CHARACTER":
         buttons.append([InlineKeyboardButton("Description", callback_data=f"desc_{result[2][0]}_CHAR{qry}{pg}_{str(auth)}_{user}")])
