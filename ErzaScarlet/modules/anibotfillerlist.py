@@ -26,14 +26,14 @@ async def fillers_cmd(client: anibot, message: Message, mdata: dict):
     if len(list_)==1:
         result = parse_filler(k.get(list_[0]))
         msg = ""
-        msg += f"Fillers for anime `{list_[0]}`\n\nManga Canon episodes:\n"
+        msg += f"Fillers for anime `{list_[0]}`\n\nepisodes:\n"
         msg += str(result.get("total_ep"))
-        msg += "\n\nMixed/Canon fillers:\n"
+        msg += "\n\nMixed fillers:\n"
         msg += str(result.get("mixed_ep"))
         msg += "\n\nFillers:\n"
         msg += str(result.get("filler_ep"))
         if result.get("ac_ep") is not None:
-            msg += "\n\nAnime Canon episodes:\n"
+            msg += "\n\nAnime episodes:\n"
             msg += str(result.get("ac_ep"))
         await message.reply_text(msg)
         return
