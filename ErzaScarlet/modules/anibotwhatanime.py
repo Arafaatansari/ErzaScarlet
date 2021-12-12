@@ -9,7 +9,7 @@ from ErzaScarlet import BOT_USERNAME as BOT_NAME, TRIGGERS as trg, pbot as anibo
 from ErzaScarlet.helper_extra.helper import check_user, control_user, media_to_image, rand_key
 from ErzaScarlet.helper_extra.data_parser import check_if_adult
 from ErzaScarlet.helper_extra.db import get_collection
-from ErzaScarlet.modules_anilist import no_pic
+from ErzaScarlet.modules.anibotanilist import no_pic
 
 SFW_GRPS = get_collection("SFW_GROUPS")
 DC = get_collection('DISABLED_CMDS')
