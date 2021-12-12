@@ -16,6 +16,9 @@ ANIME_TEMPLATE = """{name}
 ‣ **TYPE:** `{formats}`{avscd}{dura}{user_data}
 ‣ **ADULT RATED:** `{adult}`
 {status_air}{gnrs_}{tags_}
+🎬 {trailer_link}
+📖 <a href="{surl}">Synopsis</a>
+📖 <a href="{url}">Official Site</a>
 {additional}"""
 
 # GraphQL Queries.
@@ -847,8 +850,7 @@ async def get_anime(vars_, auth: bool = False, user: int = None):
     else:
         status_air = f"‣ **STATUS:** `{status}`\n‣ **NEXT AIRING:** `{air_on}`"
     if data["trailer"] and data["trailer"]["site"] == "youtube":
-        trailer_link = f"https://youtu.be/{data['trailer']['id']}"
-        #buttons_trailer = [[InlineKeyboardButton("Trailer", url=trailer_link)]]
+        trailer_link = f"<a href='https://youtu.be/{data['trailer']['id']}'>Trailer</a>"
     title_img = f"https://img.anili.st/media/{idm}"
     try:
         finals_ = ANIME_TEMPLATE.format(**locals())
