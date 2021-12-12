@@ -13,8 +13,7 @@ ANIME_DB, MANGA_DB, CHAR_DB = {}, {}, {}
 
 ANIME_TEMPLATE = """{name}
 \n‣ **TYPE:** `{formats}`{avscd}{dura}{user_data}
-‣ **ADULT RATED:** `{adult}`
-{status_air}{gnrs_}{tags_}
+{status_air}{gnrs_}
 \n🎬 {trailer_link}
 📖 <a href="{surl}">Synopsis</a>
 📖 <a href="{url}">Official Site</a>
