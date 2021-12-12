@@ -12,8 +12,7 @@ ANIME_DB, MANGA_DB, CHAR_DB = {}, {}, {}
 #### Anilist part ####
 
 ANIME_TEMPLATE = """{name}
-\n‣ **SOURCE:** `{source}`
-‣ **TYPE:** `{formats}`{avscd}{dura}{user_data}
+\n‣ **TYPE:** `{formats}`{avscd}{dura}{user_data}
 ‣ **ADULT RATED:** `{adult}`
 {status_air}{gnrs_}{tags_}
 \n🎬 {trailer_link}
