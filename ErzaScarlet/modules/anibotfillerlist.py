@@ -1,8 +1,8 @@
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, Message
-from ErzaScarlet.helper_extra.data_parser import search_filler, parse_filler
-from ErzaScarlet.helper_extra.helper import check_user, control_user, rand_key
-from ErzaScarlet.helper_extra.db import get_collection
+from ErzaScarlet.utils.data_parser import search_filler, parse_filler
+from ErzaScarlet.utils.helper import check_user, control_user, rand_key
+from ErzaScarlet.utils.db import get_collection
 from ErzaScarlet import BOT_USERNAME as BOT_NAME, TRIGGERS as trg, pbot as anibot
 
 FILLERS = {}

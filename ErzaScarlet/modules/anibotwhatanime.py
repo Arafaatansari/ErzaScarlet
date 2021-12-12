@@ -6,9 +6,9 @@ from aiohttp import ClientSession
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, InputMediaPhoto, InputMediaVideo, Message
 from ErzaScarlet import BOT_USERNAME as BOT_NAME, TRIGGERS as trg, pbot as anibot
-from ErzaScarlet.helper_extra.helper import check_user, control_user, media_to_image, rand_key
-from ErzaScarlet.helper_extra.data_parser import check_if_adult
-from ErzaScarlet.helper_extra.db import get_collection
+from ErzaScarlet.utils.helper import check_user, control_user, media_to_image, rand_key
+from ErzaScarlet.utils.data_parser import check_if_adult
+from ErzaScarlet.utils.db import get_collection
 from ErzaScarlet.modules.anibotanilist import no_pic
 
 SFW_GRPS = get_collection("SFW_GROUPS")

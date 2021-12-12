@@ -15,13 +15,13 @@ from pyrogram import filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from pyrogram.errors import ChannelInvalid as ci, ChannelPrivate as cp, PeerIdInvalid as pi, FloodWait as fw
 from ErzaScarlet import BOT_USERNAME as BOT_NAME, TRIGGERS as trg, DEV_USERS as OWNER, pbot as anibot, DOWN_PATH, EVENT_LOGS as LOG_CHANNEL_ID
-from ErzaScarlet.helper_extra.db import get_collection
-from ErzaScarlet.helper_extra.helper import (
+from ErzaScarlet.utils.db import get_collection
+from ErzaScarlet.utils.helper import (
     AUTH_USERS, clog, check_user, control_user, rand_key, return_json_senpai,
     runcmd, take_screen_shot, IGNORE, media_to_image, make_it_rw,
     USER_JSON, USER_WC
 )
-from ErzaScarlet.helper_extra.data_parser import (
+from ErzaScarlet.utils.data_parser import (
     get_all_genres, get_all_tags, get_top_animes, get_user_activity, get_user_favourites, toggle_favourites, parse_filler,
     get_anime, get_airing, get_anilist, get_character, get_additional_info, get_manga, browse_, get_wo, get_wols, AIR_QUERY,
     get_featured_in_lists, update_anilist, get_user, ANIME_DB, MANGA_DB, CHAR_DB, get_scheduled, search_filler, ANIME_QUERY,
