@@ -15,7 +15,8 @@ geopy
 faker
 nltk
 psutil
-aiohttp>=2.2.5
+aiohttp
+bs4
 aiohttp[speedups]>=3.7.3
 Pillow>=4.2.0
 CurrencyConverter
