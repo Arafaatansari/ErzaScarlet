@@ -1,11 +1,12 @@
 import importlib, traceback, html, json
 import re
+import os
 import random
 import time
 import subprocess
 from sys import argv
 from typing import Optional, List
-
+import ErzaScarlet.modules.sql.users_sql as sql
 from telegram import Message, Chat, User ,Update
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.error import (
@@ -58,16 +59,17 @@ from ErzaScarlet.modules.helper_funcs.admin_rights import user_can_ban
 from ErzaScarlet.modules.helper_funcs.readable_time import get_readable_time
 
 
+
 PM_START_TEXT = """
-Hey there, {}!
-Hey I Am {}
+*Hi There! {}, myself {}!* 
 
-I can manage your group easily with many feautres and games. **Just add me in your group to use me.
+I'm an Highly Advanced Bot With 100's Awesome Features.
 
-*Status*: [Working Fine](https://t.me/ErzaScarlet_Support)
-*Life Force*: `100%`
+To Use My All Features Add Me In Your Group & Don't Forget To Promote Me As Admin.
 
-Too see commands send /help .
+Here is my quick status :)
+• *Uptime:* `{}`
+• `{}` *users, across* `{}` *chats.*
 """
 
 
@@ -80,8 +82,8 @@ HELP_STRINGS = """
    ◔ in a Group: will redirect you to pm, with all that chat's settings.
 """
 
-ErzaScarlet_IMG = "https://indianime.com/wp-content/uploads/2021/08/photo_2021-08-21_12-17-22.jpg)"
-ErzaScarlet_YAWN = "https://telegra.ph/file/baad9f6111310638c438c.mp4" #"https://telegra.ph/file/df5c1103ab9d539ab760d.gif"
+ErzaScarlet_IMG = os.environ.get("ErzaScarlet_IMG", "https://telegra.ph/file/ba33005190ef23d2d736d.jpg")
+ErzaScarlet_YAWN = os.environ.get("ErzaScarlet_YAWN", "https://telegra.ph/file/baad9f6111310638c438c.mp4")
 YAWN_CPT = "I am Awake ! ~ 💤"
 
 IMPORTED = {}
@@ -197,35 +199,43 @@ def start(update: Update, context: CallbackContext):
             first_name = update.effective_user.first_name
             update.effective_message.reply_photo(
                 ErzaScarlet_IMG,
-                PM_START_TEXT.format(
+                caption=PM_START_TEXT.format(
                     escape_markdown(first_name),
-                    escape_markdown(context.bot.first_name)),
+                    escape_markdown(context.bot.first_name),
+                    escape_markdown(uptime),
+                    sql.num_users(),
+                    sql.num_chats()),
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                text="Add Erza In Your Group",
-                                url="t.me/{}?startgroup=true".format(
-                                    context.bot.username,
-                                ),
-                            ),
-                            InlineKeyboardButton(
-                                text="Support Group",
-                                url=f"https://t.me/{SUPPORT_CHAT}",
-                            ),
-                        ],
+                    [[
+                        InlineKeyboardButton(
+                            text="➕️ ᴀᴅᴅ ᴇʀᴢᴀ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️",
+                            url="t.me/{}?startgroup=true".format(
+                                context.bot.username))
                     ],
-                ),
-            )
+                     [
+                         InlineKeyboardButton(
+                             text="🔰 ꜱᴜᴘᴘᴏʀᴛ 🔰",
+                             url=f"https://t.me/{SUPPORT_CHAT}"),
+                         InlineKeyboardButton(
+                             text="🎉 ᴜᴘᴅᴀᴛᴇs 🎉",
+                             url="https://t.me/IndiAnimeBots"),
+              
+                    ],
+                     [                    
+                        InlineKeyboardButton(
+                             text="🀄️ ᴄᴏᴍᴍᴀɴᴅꜱ 🀄️",
+                             url="https://t.me/{}}?start=help".format(
+                                context.bot.username)),      
+                    ]]))
     else:
         update.effective_message.reply_video(
-            ErzaScarlet_YAWN, 
-            YAWN_CPT.format(
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            ))
+                ErzaScarlet_YAWN)
+        update.effective_message.reply_text(
+            "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
+            .format(uptime),
+            parse_mode=ParseMode.HTML)
    
 
 
