@@ -71,7 +71,7 @@ async def anime_cmd(client: anibot, message: Message, mdata: dict):
         return await k.delete()
     buttons = get_btns("ANIME", result=result, user=user, auth=auth)
     buttons += get_anime("buttons_trailer")
-    buttons += ([InlineKeyboardButton("Trailer",url=f"{get_anime("trailer_link")}")])
+    buttons += ([InlineKeyboardButton("Trailer",url=f"{get_anime('trailer_link')}")])
     if await (SFW_GRPS.find_one({"id": gid})) and result[2].pop()=="True":
         await client.send_photo(gid, no_pic[random.randint(0, 4)], caption="This anime is marked 18+ and not allowed in this group")
         return
