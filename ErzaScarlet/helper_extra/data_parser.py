@@ -1,7 +1,7 @@
 import requests
 import time
 from bs4 import BeautifulSoup
-from ErzaScarlet.helper_extra.anibot.helper import cflag, make_it_rw, pos_no, return_json_senpai, day_, season_
+from ErzaScarlet.helper_extra.helper import cflag, make_it_rw, pos_no, return_json_senpai, day_, season_
 from ErzaScarlet import BOT_USERNAME as BOT_NAME
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from jikanpy import AioJikan
@@ -12,14 +12,10 @@ ANIME_DB, MANGA_DB, CHAR_DB = {}, {}, {}
 #### Anilist part ####
 
 ANIME_TEMPLATE = """{name}
-**ID | MAL ID:** `{idm}` | `{idmal}`
-➤ **SOURCE:** `{source}`
-➤ **TYPE:** `{formats}`{avscd}{dura}{user_data}
-➤ **ADULT RATED:** `{adult}`
+‣ **SOURCE:** `{source}`
+‣ **TYPE:** `{formats}`{avscd}{dura}{user_data}
+‣ **ADULT RATED:** `{adult}`
 {status_air}{gnrs_}{tags_}
-🎬 {trailer_link}
-📖 <a href="{surl}">Synopsis</a>
-📖 <a href="{url}">Official Site</a>
 {additional}"""
 
 # GraphQL Queries.

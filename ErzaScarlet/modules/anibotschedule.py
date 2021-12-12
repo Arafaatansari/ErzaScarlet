@@ -2,9 +2,9 @@
 from pyrogram import filters
 from pyrogram.types import Message, CallbackQuery
 from ErzaScarlet import BOT_USERNAME as BOT_NAME, TRIGGERS as trg, pbot as anibot
-from ErzaScarlet.helper_extra.anibot.data_parser import get_scheduled
-from ErzaScarlet.helper_extra.anibot.helper import control_user, get_btns, check_user
-from ErzaScarlet.helper_extra.anibot.db import get_collection
+from ErzaScarlet.helper_extra.data_parser import get_scheduled
+from ErzaScarlet.helper_extra.helper import control_user, get_btns, check_user
+from ErzaScarlet.helper_extra.db import get_collection
 
 DC = get_collection('DISABLED_CMDS')
 

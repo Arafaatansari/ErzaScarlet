@@ -11,7 +11,7 @@ from uuid import uuid4
 from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import InlineKeyboardButton, CallbackQuery, Message, InlineKeyboardMarkup
 from ErzaScarlet import DEV_USERS as OWNER, DOWN_PATH, pbot as anibot, EVENT_LOGS as LOG_CHANNEL_ID, has_user
-from ErzaScarlet.helper_extra.anibot.db import get_collection
+from ErzaScarlet.helper_extra.db import get_collection
 
 if has_user:
     from ErzaScarlet import user

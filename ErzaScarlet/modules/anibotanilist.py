@@ -8,13 +8,13 @@ from pyrogram import filters
 from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, Message
 from pyrogram.errors import UserNotParticipant
 from ErzaScarlet import ANILIST_CLIENT, ANILIST_REDIRECT_URL, ANILIST_SECRET, DEV_USERS as OWNER, TRIGGERS as trg, BOT_USERNAME as BOT_NAME, pbot as anibot
-from ErzaScarlet.helper_extra.anibot.data_parser import (
+from ErzaScarlet.helper_extra.data_parser import (
     get_all_genres, get_all_tags, get_top_animes, get_user_activity, get_user_favourites, toggle_favourites,
     get_anime, get_airing, get_anilist, get_character, get_additional_info, get_manga, browse_,
     get_featured_in_lists, update_anilist, get_user, ANIME_DB, MANGA_DB, CHAR_DB
 )
-from ErzaScarlet.helper_extra.anibot.helper import ANON_JSON, check_user, get_btns, AUTH_USERS, rand_key, clog, control_user, update_pics_cache
-from ErzaScarlet.helper_extra.anibot.db import get_collection
+from ErzaScarlet.helper_extra.helper import ANON_JSON, check_user, get_btns, AUTH_USERS, rand_key, clog, control_user, update_pics_cache
+from ErzaScarlet.helper_extra.db import get_collection
 
 GROUPS = get_collection("GROUPS")
 SFW_GRPS = get_collection("SFW_GROUPS")
@@ -77,7 +77,7 @@ async def anime_cmd(client: anibot, message: Message, mdata: dict):
     await update_pics_cache(title_img)
 
 
-@anibot.on_message(filters.command(["animanga", f"animanga{BOT_NAME}"], prefixes=trg))
+@anibot.on_message(filters.command(["manga", f"manga{BOT_NAME}"], prefixes=trg))
 @control_user
 async def manga_cmd(client: anibot, message: Message, mdata: dict):
     """Search Manga Info"""
@@ -120,7 +120,7 @@ async def manga_cmd(client: anibot, message: Message, mdata: dict):
     await update_pics_cache(pic)
 
 
-@anibot.on_message(filters.command(["anicharacter", f"anicharacter{BOT_NAME}"], prefixes=trg))
+@anibot.on_message(filters.command(["character", f"character{BOT_NAME}"], prefixes=trg))
 @control_user
 async def character_cmd(client: anibot, message: Message, mdata: dict):
     """Get Info about a Character"""
@@ -226,7 +226,7 @@ async def flex_cmd(client: anibot, message: Message, mdata: dict):
     await client.send_photo(gid, pic, caption=msg, reply_markup=buttons)
 
 
-@anibot.on_message(filters.command(["anitop", f"anitop{BOT_NAME}"], prefixes=trg))
+@anibot.on_message(filters.command(["top", f"top{BOT_NAME}"], prefixes=trg))
 @control_user
 async def top_tags_cmd(client: anibot, message: Message, mdata: dict):
     query = mdata['text'].split(" ", 1)
@@ -249,7 +249,7 @@ async def top_tags_cmd(client: anibot, message: Message, mdata: dict):
     await client.send_message(gid, msg[0], reply_markup=buttons if buttons!='' else None)
 
 
-@anibot.on_message(filters.command(["aniairing", f"aniairing{BOT_NAME}"], prefixes=trg))
+@anibot.on_message(filters.command(["airing", f"airing{BOT_NAME}"], prefixes=trg))
 @control_user
 async def airing_cmd(client: anibot, message: Message, mdata: dict):
     """Get Airing Detail of Anime"""
