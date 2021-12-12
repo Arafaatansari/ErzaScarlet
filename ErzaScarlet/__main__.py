@@ -226,7 +226,7 @@ def start(update: Update, context: CallbackContext):
                      [                    
                         InlineKeyboardButton(
                              text="🀄️ ᴄᴏᴍᴍᴀɴᴅꜱ 🀄️",
-                             url="https://t.me/{}}?start=help".format(
+                             url="t.me/{}?start=help".format(
                                 context.bot.username)),      
                     ]]))
     else:
