@@ -16,6 +16,7 @@ faker
 nltk
 psutil
 aiohttp>=2.2.5
+aiohttp[speedups]>=3.7.3
 Pillow>=4.2.0
 CurrencyConverter
 googletrans==3.1.0a0
@@ -57,5 +58,13 @@ urllib3
 heroku3
 search_engine_parser
 bing_image_downloader
+
+#ADDED FOR ANIBOT
 pymongo
 dnspython
+tracemoepy
+lottie
+motor
+natsort
+apscheduler
+html5lib

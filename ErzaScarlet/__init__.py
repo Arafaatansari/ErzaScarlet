@@ -93,8 +93,22 @@ if ENV:
     IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
-    OWNER = list(filter(lambda x: x, map(int, os.environ.get("REQ_OWNER").split())))  ## sudos can be included
+    BOT_USERNAME = os.environ.get("BOT_USERNAME", "@ErzaScarlet_groupbot")
+    MONGO_URI = os.environ.get("MONGO_DB_URI")
     
+    #IGNORE THIS 
+    DOWN_PATH = "anibot/downloads/"
+    TRIGGERS = os.environ.get("TRIGGERS", "/ ! . ? ) ( ").split()
+    
+    #ANILISt CREDENTIALS
+    ANILIST_CLIENT = os.environ.get("ANILIST_CLIENT")
+    ANILIST_SECRET = os.environ.get("ANILIST_SECRET")
+    ANILIST_REDIRECT_URL = os.environ.get("ANILIST_REDIRECT_URL", "https://anilist.co/api/v2/oauth/pin")
+
+    has_user: bool = False
+    if os.environ.get('USER_SESSION'): 
+        has_user: bool = True
+        user = Client(os.environ.get('USER_SESSION'), api_id=API_ID, api_hash=API_HASH)
     
     try:
         WHITELIST_CHATS = set(int(x) for x in os.environ.get('WHITELIST_CHATS', "").split())
