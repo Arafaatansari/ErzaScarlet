@@ -92,7 +92,7 @@ async def filter_requests(event):
                         auth.append(x.id)
 
 # For Adding group & channel ID in database for #request feature
-@tbot.on(events.NewMessage(pattern = "/add"))
+@tbot.on(events.NewMessage(pattern = "/addrequest"))
 async def addIDHandler(event):
     msg = event.text.split(" ")
     if len(msg) == 3:
@@ -199,7 +199,7 @@ async def addIDHandler(event):
     return
 
 # For Removing group & channel ID from database
-@tbot.on(events.NewMessage(pattern = "/remove"))
+@tbot.on(events.NewMessage(pattern = "/removerequest"))
 async def removeIDHandler(event):
     msg = event.text.split(" ")
     if len(msg) == 2:
@@ -339,3 +339,15 @@ async def ans(e):
 @tbot.on(events.callbackquery.CallbackQuery(data="ndone"))
 async def ans(e):
     await e.answer("This Request is unavailable... Ask Admins in @indianimein for help. 💞", alert=True, cache_time=0)
+
+
+__mod_name__ = "Requester"
+
+__help__ = """
+*Request Tracker Module Normally Created For Movies And Animes Channel To Manage Thier Users Requests.*
+ ❍ /addrequest groupid channelid
+ ❍ Example : /addrequest -100123456789 -1000987654321
+ ❍ /removerequest groupid
+ 
+ Created By @AjTimePyro
+ """

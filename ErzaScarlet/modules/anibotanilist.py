@@ -47,7 +47,7 @@ async def anime_cmd(client: anibot, message: Message, mdata: dict):
         except KeyError:
             gidtitle = mdata['chat']['title']
         await GROUPS.insert_one({"id": gid, "grp": gidtitle})
-        await clog("ANIBOT", f"Bot added to a new group\n\n{gidtitle}\nID: `{gid}`", "NEW_GROUP")
+        await clog("ErzaBot", f"Bot added to a new group\n\n{gidtitle}\nID: `{gid}`", "NEW_GROUP")
     find_gc = await DC.find_one({'_id': gid})
     if find_gc is not None and 'anime' in find_gc['cmd_list'].split():
         return

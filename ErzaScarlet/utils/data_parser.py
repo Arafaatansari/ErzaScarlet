@@ -801,12 +801,9 @@ async def get_anime(vars_, auth: bool = False, user: int = None):
             in_ls_score = f" and scored {in_list['score']}" if in_list['score']!=0 else ""
             user_data = f"\n‣ **USER DATA:** `{in_ls_stts}{fav}{in_ls_score}`"
     if data["title"]["english"] is not None:
-        name = f"""[{c_flag}]**{romaji}**
-        __{english}__
-        {native}"""
+        name = f"""**{romaji}** | `{english}`"""
     else:
-        name = f"""[{c_flag}]**{romaji}**
-        {native}"""
+        name = f"""[{c_flag}]**{romaji}**"""
     prql, prql_id, sql, sql_id = "", "None", "", "None"
     for i in prqlsql:
         if i["relationType"] == "PREQUEL":
