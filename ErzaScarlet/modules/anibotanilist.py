@@ -35,6 +35,13 @@ no_pic = [
 @anibot.on_message(filters.command(['start', f'start{BOT_NAME}'], prefixes=trg))
 @control_user
 async def start_(client: anibot, message: Message, mdata: dict):
+    gid = mdata['chat']['id']
+    try:
+        user = mdata['from_user']['id']
+    except KeyError:
+        user = 00000000
+    find_gc = await DC.find_one({'_id': gid})
+    if find_gc is not None and 'start' in find_gc['cmd_list'].split():
         if len(mdata['text'].split())!=1:
             deep_cmd = mdata['text'].split()[1]
             if deep_cmd=="help":
