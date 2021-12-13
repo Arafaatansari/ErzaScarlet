@@ -845,13 +845,13 @@ async def get_anime(vars_, auth: bool = False, user: int = None):
     else:
         status_air = f"‣ **STATUS:** `{status}`\n‣ **NEXT AIRING:** {air_on}"
     if data["trailer"] and data["trailer"]["site"] == "youtube":
-        trailer_link = f"<a href='https://youtu.be/{data['trailer']['id']}'>Trailer</a>"
+        trailer_link = f"https://youtu.be/{data['trailer']['id']}"
     title_img = f"https://img.anili.st/media/{idm}"
     try:
         finals_ = ANIME_TEMPLATE.format(**locals())
     except KeyError as kys:
         return [f"{kys}"]
-    return title_img, finals_, [idm, in_ls, in_ls_id, isfav, str(adult)], prql_id, sql_id
+    return title_img, finals_, [idm, in_ls, in_ls_id, isfav, str(adult)], prql_id, sql_id, trailer_link
 
 
 async def get_anilist(qdb, page, auth: bool = False, user: int = None):
