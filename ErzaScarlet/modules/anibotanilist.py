@@ -35,23 +35,6 @@ no_pic = [
 @anibot.on_message(filters.command(['start', f'start{BOT_NAME}'], prefixes=trg))
 @control_user
 async def start_(client: anibot, message: Message, mdata: dict):
-    gid = mdata['chat']['id']
-    try:
-        user = mdata['from_user']['id']
-    except KeyError:
-        user = 00000000
-    find_gc = await DC.find_one({'_id': gid})
-    if find_gc is not None and 'start' in find_gc['cmd_list'].split():
-        return
-    bot = await client.get_me()
-    if gid==user:
-        if not (user in OWNER) and not (await USERS.find_one({"id": user})):
-            try:
-                usertitle = mdata['from_user']['username']
-            except KeyError:
-                usertitle = mdata['from_user']['first_name']
-            await USERS.insert_one({"id": user, "user": usertitle})
-            await clog("ANIBOT", f"New User started bot\n\n[{usertitle}](tg://user?id={user})\nID: `{user}`", "NEW_USER")
         if len(mdata['text'].split())!=1:
             deep_cmd = mdata['text'].split()[1]
             if deep_cmd=="help":
@@ -74,23 +57,6 @@ async def start_(client: anibot, message: Message, mdata: dict):
                 qry = deep_cmd.split("_", 1)[1]
                 k = await AUTH_USERS.find_one({'_id': ObjectId(qry)})
                 await code_cmd(k['code'], message)
-                return
-        await client.send_message(
-            gid,
-            text=f"""Kon'nichiwa!!!
-I'm {bot.first_name} bot and I can help you get info on Animes, Mangas, Characters, Airings, Schedules, Watch Orders of Animes, etc
-For more info send /help in here.
-If you wish to use me in a group start me by /start{BOT_NAME} command after adding me in the group."""
-        )
-    else:
-        if not await (GROUPS.find_one({"id": gid})):
-            try:
-                gidtitle = mdata['chat']['username']
-            except KeyError:
-                gidtitle = mdata['chat']['title']
-            await GROUPS.insert_one({"id": gid, "grp": gidtitle})
-            await clog("ANIBOT", f"Bot added to a new group\n\n{gidtitle}\nID: `{gid}`", "NEW_GROUP")
-        await client.send_message(gid, text="Bot seems online!!!")
 
 @anibot.on_message(filters.command(["anime", f"anime{BOT_NAME}"], prefixes=trg))
 @control_user
