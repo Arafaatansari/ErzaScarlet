@@ -16,7 +16,7 @@ ANIME_TEMPLATE = """{name}
 {status_air}{gnrs_}
 \n🎬 {trailer_link}
 📖 <a href="{surl}">Synopsis</a>
-📖 <a href="{url}">Official Site</a>
+📖 <a href="{url}">Official Site</a>\n
 {additional}"""
 
 # GraphQL Queries.
