@@ -42,6 +42,15 @@ async def start_(client: anibot, message: Message, mdata: dict):
         user = 00000000
     find_gc = await DC.find_one({'_id': gid})
     if find_gc is not None and 'start' in find_gc['cmd_list'].split():
+        return
+    bot = await client.get_me()
+    if gid==user:
+        if not (user in OWNER) and not (await USERS.find_one({"id": user})):
+            try:
+                usertitle = mdata['from_user']['username']
+            except KeyError:
+                usertitle = mdata['from_user']['first_name']
+            await USERS.insert_one({"id": user, "user": usertitle})
         if len(mdata['text'].split())!=1:
             deep_cmd = mdata['text'].split()[1]
             if deep_cmd=="help":
