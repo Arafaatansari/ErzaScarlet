@@ -838,9 +838,9 @@ async def get_anime(vars_, auth: bool = False, user: int = None):
         air_on = make_it_rw(nextAir*1000)
         eps = data["nextAiringEpisode"]["episode"]
         th = pos_no(str(eps))
-        air_on += f" | {eps}{th} eps"
+        air_on += f"\n‣ **EPISODES:** {eps}"
     if air_on  is None:
-        eps_ = f"` | `{episodes} eps" if episodes is not None else ""
+        eps_ = f"{episodes}" if episodes is not None else ""
         status_air = f"‣ **STATUS:** `{status}`\n‣ **EPISODES:** `{eps_}`"
     else:
         status_air = f"‣ **STATUS:** `{status}`\n‣ **NEXT AIRING:** `{air_on}`"
@@ -939,9 +939,9 @@ async def get_anilist(qdb, page, auth: bool = False, user: int = None):
         air_on = make_it_rw(nextAir*1000)
         eps = data["nextAiringEpisode"]["episode"]
         th = pos_no(str(eps))
-        air_on += f" | {eps}{th} eps"
+        air_on += f"\n**EPISODES:** `{eps}`"
     if air_on  is None:
-        eps_ = f"` | `{episodes} eps" if episodes is not None else ""
+        eps_ = f"{episodes}" if episodes is not None else ""
         status_air = f"‣ **STATUS:** `{status}`\n‣ **EPISODES:** `{eps_}`"
     else:
         status_air = f"‣ **STATUS:** `{status}`\n‣ **NEXT AIRING:** `{air_on}`"
