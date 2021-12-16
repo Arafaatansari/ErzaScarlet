@@ -131,7 +131,46 @@ async def en_dis__able_cmd(client: anibot, message: Message, mdata: dict):
         else:
             await message.reply_text("Hee, is that a command?!")
 
-
+@anibot.on_message(filters.command(['start', f'start{BOT_NAME}'], prefixes=trg))
+@control_user
+async def start_(client: anibot, message: Message, mdata: dict):
+    gid = mdata['chat']['id']
+    try:
+        user = mdata['from_user']['id']
+    except KeyError:
+        user = 00000000
+    find_gc = await DC.find_one({'_id': gid})
+    if find_gc is not None and 'start' in find_gc['cmd_list'].split():
+        return
+    bot = await client.get_me()
+    if gid==user:
+        if not (user in OWNER) and not (await USERS.find_one({"id": user})):
+            try:
+                usertitle = mdata['from_user']['username']
+            except KeyError:
+                usertitle = mdata['from_user']['first_name']
+            await USERS.insert_one({"id": user, "user": usertitle})
+            await clog("ANIBOT", f"New User started bot\n\n[{usertitle}](tg://user?id={user})\nID: `{user}`", "NEW_USER")
+        if len(mdata['text'].split())!=1:
+            deep_cmd = mdata['text'].split()[1]
+            if deep_cmd=="auth":
+                await auth_link_cmd(client, message)
+                return
+            if deep_cmd=="logout":
+                await logout_cmd(client, message)
+                return
+            if deep_cmd.split("_")[0]=="des":
+                pic, result = await get_additional_info(deep_cmd.split("_")[2], "desc", deep_cmd.split("_")[1])
+                await client.send_photo(user, pic)
+                await client.send_message(user, result.replace("~!", "").replace("!~", ""))
+                return
+            if deep_cmd.split("_", 1)[0]=="code":
+                if not os.environ.get('ANILIST_REDIRECT_URL'):
+                    return
+                qry = deep_cmd.split("_", 1)[1]
+                k = await AUTH_USERS.find_one({'_id': ObjectId(qry)})
+                await code_cmd(k['code'], message)
+                return
 
 @anibot.on_message(~filters.private & filters.command(['disabled', f'disabled{BOT_NAME}']))
 @control_user
