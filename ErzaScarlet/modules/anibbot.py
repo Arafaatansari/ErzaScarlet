@@ -132,6 +132,7 @@ async def en_dis__able_cmd(client: anibot, message: Message, mdata: dict):
             await message.reply_text("Hee, is that a command?!")
 
 
+
 @anibot.on_message(~filters.private & filters.command(['disabled', f'disabled{BOT_NAME}']))
 @control_user
 async def list_disabled(client: anibot, message: Message, mdata: dict):
