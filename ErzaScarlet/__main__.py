@@ -234,7 +234,29 @@ def start(update: Update, context: CallbackContext):
                 ErzaScarlet_YAWN,
                 caption="I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
             .format(uptime),
-            parse_mode=ParseMode.HTML)
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                    [[
+                        InlineKeyboardButton(
+                            text="➕️ ᴀᴅᴅ ᴇʀᴢᴀ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️",
+                            url="t.me/{}?startgroup=true".format(
+                                context.bot.username))
+                    ],
+                     [
+                         InlineKeyboardButton(
+                             text="🔰 ꜱᴜᴘᴘᴏʀᴛ 🔰",
+                             url=f"https://t.me/{SUPPORT_CHAT}"),
+                         InlineKeyboardButton(
+                             text="🎉 ᴜᴘᴅᴀᴛᴇs 🎉",
+                             url="https://t.me/IndiAnimeBots"),
+              
+                    ],
+                     [                    
+                        InlineKeyboardButton(
+                             text="🀄️ ᴄᴏᴍᴍᴀɴᴅꜱ 🀄️",
+                             url="t.me/{}?start=help".format(
+                                context.bot.username)),      
+                    ]]))
    
 
 
