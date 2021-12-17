@@ -4,7 +4,7 @@ import re
 import requests
 from bs4 import BeautifulSoup as bs
 
-from Erzascarlet.events import register
+from ErzaScarlet.events import register
 
 try:
     import aiofiles
