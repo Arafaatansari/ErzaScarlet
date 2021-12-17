@@ -40,7 +40,7 @@ async def downakd(e):
             Random = True
         match = match.split(";")[0]
     else:
-        num = 8
+        num = 5
     xd = await e.reply("`Processing...`")
     match = match.replace(" ", "+")
     link = "https://www.deviantart.com/search?q=" + match
