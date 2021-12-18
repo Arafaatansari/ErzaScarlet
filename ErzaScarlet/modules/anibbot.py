@@ -150,7 +150,7 @@ async def start_(client: anibot, message: Message, mdata: dict):
             except KeyError:
                 usertitle = mdata['from_user']['first_name']
             await USERS.insert_one({"id": user, "user": usertitle})
-            await clog("ANIBOT", f"New User started bot\n\n[{usertitle}](tg://user?id={user})\nID: `{user}`", "NEW_USER")
+            await clog("ErzaBot", f"New User started bot\n\n[{usertitle}](tg://user?id={user})\nID: `{user}`", "NEW_USER")
         if len(mdata['text'].split())!=1:
             deep_cmd = mdata['text'].split()[1]
             if deep_cmd=="auth":
