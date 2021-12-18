@@ -69,4 +69,3 @@ motor
 natsort
 apscheduler
 html5lib
-aiofiles==0.8.0
