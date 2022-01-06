@@ -5,7 +5,6 @@ import random
 import time
 import subprocess
 from sys import argv
-from Videos import *
 from typing import Optional, List
 import ErzaScarlet.modules.sql.users_sql as sql
 from telegram import Message, Chat, User ,Update
