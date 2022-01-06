@@ -66,6 +66,15 @@ ErzaScarlet_YAWN = (
     "https://files.unknownclouds.workers.dev/0:/Edits/%5BIndiAnime%5D%20%5B05%20-%20Erza%20Edit%5D.mp4",
 )
 
+ErzaScarlet_IMG = (
+    "https://telegra.ph/file/6a4b449ce29c285376eb1.jpg",
+    "https://telegra.ph/file/677511140bf73b443cac4.jpg",
+    "https://telegra.ph/file/d100dd01f93d8c3720108.jpg",
+    "https://telegra.ph/file/dfa160fbc854dd3e4c60d.jpg",
+    "https://telegra.ph/file/ba1665489ea4791ea23da.jpg",
+    "https://telegra.ph/file/676b42275e390168e50f9.jpg",
+)
+
 PM_START_TEXT = """
 *Hi There! {}, myself {}!* 
 
@@ -88,7 +97,7 @@ HELP_STRINGS = """
    ◔ in a Group: will redirect you to pm, with all that chat's settings.
 """
 
-ErzaScarlet_IMG = os.environ.get("ErzaScarlet_IMG", "https://telegra.ph/file/ba33005190ef23d2d736d.jpg")
+#ErzaScarlet_IMG = os.environ.get("ErzaScarlet_IMG", "https://telegra.ph/file/ba33005190ef23d2d736d.jpg")
 #ErzaScarlet_YAWN = os.environ.get("ErzaScarlet_YAWN", "https://telegra.ph/file/baad9f6111310638c438c.mp4")
 YAWN_CPT = "I am Awake ! ~ 💤"
 
@@ -204,7 +213,7 @@ def start(update: Update, context: CallbackContext):
         else:
             first_name = update.effective_user.first_name
             update.effective_message.reply_photo(
-                ErzaScarlet_IMG,
+                random.choice(ErzaScarlet_IMG),
                 caption=PM_START_TEXT.format(
                     escape_markdown(first_name),
                     escape_markdown(context.bot.first_name),
@@ -243,12 +252,6 @@ def start(update: Update, context: CallbackContext):
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                     [[
-                        InlineKeyboardButton(
-                            text="➕️ ᴀᴅᴅ ᴇʀᴢᴀ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️",
-                            url="t.me/{}?startgroup=true".format(
-                                context.bot.username))
-                    ],
-                     [
                          InlineKeyboardButton(
                              text="🔰 ꜱᴜᴘᴘᴏʀᴛ 🔰",
                              url=f"https://t.me/{SUPPORT_CHAT}"),
