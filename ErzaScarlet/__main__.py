@@ -73,6 +73,19 @@ ErzaScarlet_IMG = (
     "https://telegra.ph/file/dfa160fbc854dd3e4c60d.jpg",
     "https://telegra.ph/file/ba1665489ea4791ea23da.jpg",
     "https://telegra.ph/file/676b42275e390168e50f9.jpg",
+    "https://telegra.ph/file/213d17b001964f817bec1.jpg",
+    "https://telegra.ph/file/3dd5a6869788b76771690.png",
+    "https://telegra.ph/file/1ab8ae18150f100a1a8ca.png",
+    "https://telegra.ph/file/b5168e91fdfb83bcf596d.jpg",
+    "https://telegra.ph/file/2119129d4ca646566a48a.jpg",
+    "https://telegra.ph/file/a26e0d29ed7396e2f3980.jpg",
+    "https://telegra.ph/file/4f89da0e3864f2764d820.jpg",
+    "https://telegra.ph/file/a6fd97d93fce16160e84d.jpg",
+    "https://telegra.ph/file/001d0d9bedcc21af54834.jpg",
+    "https://telegra.ph/file/8fde6ad6f3447fdf07fa5.jpg",
+    "https://telegra.ph/file/bad95210bdc398be6c6a7.jpg",
+    "https://telegra.ph/file/b96f69a1842c52feddc30.jpg",
+    "https://telegra.ph/file/fb0dbae4928c0b2e539b4.jpg",
 )
 
 PM_START_TEXT = """
