@@ -5,6 +5,7 @@ import random
 import time
 import subprocess
 from sys import argv
+from Videos import *
 from typing import Optional, List
 import ErzaScarlet.modules.sql.users_sql as sql
 from telegram import Message, Chat, User ,Update
@@ -58,7 +59,13 @@ from ErzaScarlet.modules.helper_funcs.alternate import typing_action
 from ErzaScarlet.modules.helper_funcs.admin_rights import user_can_ban
 from ErzaScarlet.modules.helper_funcs.readable_time import get_readable_time
 
-
+ErzaScarlet_YAWN = (
+    "https://files.unknownclouds.workers.dev/0:/Edits/%5BIndiAnime%5D%20%5B01%20-%20Erza%20Edit%5D.mp4",
+    "https://files.unknownclouds.workers.dev/0:/Edits/%5BIndiAnime%5D%20%5B02%20-%20Erza%20Edit%5D.mp4",
+    "https://files.unknownclouds.workers.dev/0:/Edits/%5BIndiAnime%5D%20%5B03%20-%20Erza%20Edit%5D.mp4",
+    "https://files.unknownclouds.workers.dev/0:/Edits/%5BIndiAnime%5D%20%5B04%20-%20Erza%20Edit%5D.mp4",
+    "https://files.unknownclouds.workers.dev/0:/Edits/%5BIndiAnime%5D%20%5B05%20-%20Erza%20Edit%5D.mp4",
+)
 
 PM_START_TEXT = """
 *Hi There! {}, myself {}!* 
@@ -83,7 +90,7 @@ HELP_STRINGS = """
 """
 
 ErzaScarlet_IMG = os.environ.get("ErzaScarlet_IMG", "https://telegra.ph/file/ba33005190ef23d2d736d.jpg")
-ErzaScarlet_YAWN = os.environ.get("ErzaScarlet_YAWN", "https://telegra.ph/file/baad9f6111310638c438c.mp4")
+#ErzaScarlet_YAWN = os.environ.get("ErzaScarlet_YAWN", "https://telegra.ph/file/baad9f6111310638c438c.mp4")
 YAWN_CPT = "I am Awake ! ~ 💤"
 
 IMPORTED = {}
@@ -231,7 +238,7 @@ def start(update: Update, context: CallbackContext):
                     ]]))
     else:
         update.effective_message.reply_video(
-                ErzaScarlet_YAWN,
+                random.choice(ErzaScarlet_YAWN),
                 caption="I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
             .format(uptime),
             parse_mode=ParseMode.HTML,
