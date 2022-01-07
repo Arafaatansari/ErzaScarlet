@@ -68,7 +68,7 @@ async def main_handler(bot, message):
     try:
         res = await bot.kick_chat_member(chat_id, a_id)
     except:
-        return await message.reply_text("Promote me as admin, to use me")
+        return await message.reply_text("")
     if res:
         mention = (
             f"@{message.sender_chat.username}"
